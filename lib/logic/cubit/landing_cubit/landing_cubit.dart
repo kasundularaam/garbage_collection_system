@@ -16,7 +16,8 @@ class LandingCubit extends Cubit<LandingState> {
       final bool isUserIn = await SharedServices.isUserIn();
       if (isUserIn) {
         final String uid = await SharedServices.getUid();
-        final AppUser appUser = AppUser(uid: uid, name: "name");
+        final AppUser appUser = AppUser(
+            uid: uid, name: "berry", isDriver: false, email: "berry@gmail.com");
         emit(LandingToHome(appUser: appUser));
       } else {
         emit(LandingToAuth());

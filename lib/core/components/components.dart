@@ -20,18 +20,21 @@ Widget page(Widget body) => AnnotatedRegion<SystemUiOverlayStyle>(
       ),
     );
 
-Widget bottomNavPage(Widget body, BottomNavigationBar bar) =>
+Widget appScaffold(Widget body, BottomNavigationBar bar,
+        {FloatingActionButton? fab}) =>
     AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(
         statusBarColor: AppColors.primaryColor,
         statusBarIconBrightness: Brightness.light,
       ),
       child: Scaffold(
-          backgroundColor: AppColors.primaryColor,
-          body: SafeArea(
-            child: body,
-          ),
-          bottomNavigationBar: bar),
+        backgroundColor: AppColors.primaryColor,
+        body: SafeArea(
+          child: body,
+        ),
+        bottomNavigationBar: bar,
+        floatingActionButton: fab,
+      ),
     );
 
 Widget vSpacer(double height) => SizedBox(height: height.h);

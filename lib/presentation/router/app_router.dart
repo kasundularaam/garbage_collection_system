@@ -3,16 +3,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/exceptions/route_exception.dart';
 import '../../data/models/app_user.dart';
 import '../../logic/cubit/landing_cubit/landing_cubit.dart';
+import '../../logic/cubit/login_cubit/login_cubit.dart';
 import '../screens/auth/login_screen/login_page.dart';
 import '../screens/auth/register_screen/register_page.dart';
 import '../screens/home_screen/home_page.dart';
 import '../screens/landing_screen/landing_page.dart';
+import '../screens/new_request_screen/new_request_page.dart';
 
 class AppRouter {
   static const String landingPage = '/';
   static const String homePage = '/homePage';
   static const String loginPage = '/loginPage';
   static const String registerPage = '/registerPage';
+  static const String newRequestPage = '/newRequestPage';
 
   const AppRouter._();
 
@@ -34,11 +37,24 @@ class AppRouter {
         );
       case loginPage:
         return MaterialPageRoute(
-          builder: (_) => const LoginPage(),
+          builder: (_) => BlocProvider(
+            create: (context) => LoginCubit(),
+            child: const LoginPage(),
+          ),
         );
       case registerPage:
         return MaterialPageRoute(
-          builder: (_) => const RegisterPage(),
+          builder: (_) => BlocProvider(
+            create: (context) => LoginCubit(),
+            child: const RegisterPage(),
+          ),
+        );
+      case newRequestPage:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => LoginCubit(),
+            child: const NewRequestPage(),
+          ),
         );
       default:
         throw const RouteException('Route not found!');

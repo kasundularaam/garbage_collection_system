@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../../core/components/components.dart';
 import '../../../core/constants/strings.dart';
@@ -31,7 +32,13 @@ class _LandingPageState extends State<LandingPage> {
       },
       child: page(
         Center(
-          child: textP(Strings.appTitle, 22, bold: true),
+          child: Padding(
+            padding: EdgeInsets.all(10.w),
+            child: Image.asset(
+              Strings.landing,
+              fit: BoxFit.fitWidth,
+            ),
+          ),
         ),
       ),
     );
