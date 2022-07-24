@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:garbage_collection_system/presentation/router/app_router.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/components/components.dart';
@@ -31,8 +32,8 @@ class _NewRequestPageState extends State<NewRequestPage> {
               ),
               hSpacer(3),
               Expanded(
-                // child: textL("New Request", 18, bold: true),
-                child: textL("නව ඉල්ලීම්", 18, bold: true),
+                child: textL("New Request", 18, bold: true),
+                // child: textL("නව ඉල්ලීම්", 18, bold: true),
               ),
             ],
           ),
@@ -58,8 +59,8 @@ class _NewRequestPageState extends State<NewRequestPage> {
                         ),
                       ),
                       vSpacer(2),
-                      // textP("Garbage on my home", 16, bold: true),
-                      textP("මගේ නිවසේ කසල", 16, bold: true),
+                      textP("Garbage on my home", 16, bold: true),
+                      // textP("මගේ නිවසේ කසල", 16, bold: true),
                       vSpacer(1),
                       const Divider(
                         color: AppColors.dark3,
@@ -67,17 +68,18 @@ class _NewRequestPageState extends State<NewRequestPage> {
                       vSpacer(1),
                       Row(
                         children: [
-                          // Expanded(
-                          //   child: text("Send request to collect garbage", 12,
-                          //       AppColors.dark3),
-                          // ),
                           Expanded(
-                            child: text("කසල එකතු කිරීම සදහා ඉල්ලීම් කරන්න", 12,
+                            child: text(
+                                "Send request to collect garbage",
+                                12,
+                                // child: text("කසල එකතු කිරීම සදහා ඉල්ලීම් කරන්න", 12,
+
                                 AppColors.dark3),
                           ),
                           hSpacer(5),
-                          // buttonFilledP("Request", () => {})
-                          buttonFilledP("ඉල්ලීම් කරන්න", () => {})
+                          buttonFilledP("Request",
+                              () => navPush(context, AppRouter.homeGarbagePage))
+                          // buttonFilledP("ඉල්ලීම් කරන්න", () => {})
                         ],
                       ),
                     ],
@@ -100,8 +102,8 @@ class _NewRequestPageState extends State<NewRequestPage> {
                         ),
                       ),
                       vSpacer(2),
-                      // textP("Garbage on this location", 16, bold: true),
-                      textP("මෙම ස්ථනයේ ඇති කසල", 16, bold: true),
+                      textP("Garbage on this location", 16, bold: true),
+                      // textP("මෙම ස්ථනයේ ඇති කසල", 16, bold: true),
                       vSpacer(1),
                       const Divider(
                         color: AppColors.dark3,
@@ -109,17 +111,17 @@ class _NewRequestPageState extends State<NewRequestPage> {
                       vSpacer(1),
                       Row(
                         children: [
-                          // Expanded(
-                          //   child: text("Send request to collect garbage", 12,
-                          //       AppColors.dark3),
-                          // ),
                           Expanded(
-                            child: text("කසල එකතු කිරීම සදහා ඉල්ලීම් කරන්න", 12,
+                            child: text(
+                                "Send request to collect garbage",
+                                12,
+                                // child: text("කසල එකතු කිරීම සදහා ඉල්ලීම් කරන්න", 12,
                                 AppColors.dark3),
                           ),
                           hSpacer(5),
-                          // buttonFilledP("Request", () => {})
-                          buttonFilledP("ඉල්ලීම් කරන්න", () => {})
+                          buttonFilledP("Request",
+                              () => navPush(context, AppRouter.roadGarbagePage))
+                          // buttonFilledP("ඉල්ලීම් කරන්න", () => {})
                         ],
                       ),
                     ],

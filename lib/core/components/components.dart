@@ -37,6 +37,28 @@ Widget appScaffold(Widget body, BottomNavigationBar bar,
       ),
     );
 
+Widget simpleAppBar(String title, BuildContext context) {
+  return Container(
+    color: AppColors.primaryColor,
+    padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
+    child: Row(
+      children: [
+        IconButton(
+          onPressed: () => navPop(context),
+          icon: const Icon(
+            Icons.arrow_back_rounded,
+            color: AppColors.light0,
+          ),
+        ),
+        hSpacer(3),
+        Expanded(
+          child: textL(title, 18, bold: true),
+        ),
+      ],
+    ),
+  );
+}
+
 Widget vSpacer(double height) => SizedBox(height: height.h);
 Widget hSpacer(double width) => SizedBox(width: width.w);
 Widget get nothing => const SizedBox();

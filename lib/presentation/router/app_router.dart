@@ -6,9 +6,11 @@ import '../../logic/cubit/landing_cubit/landing_cubit.dart';
 import '../../logic/cubit/login_cubit/login_cubit.dart';
 import '../screens/auth/login_screen/login_page.dart';
 import '../screens/auth/register_screen/register_page.dart';
+import '../screens/home_garbage_screen/home_garbage_page.dart';
 import '../screens/home_screen/home_page.dart';
 import '../screens/landing_screen/landing_page.dart';
 import '../screens/new_request_screen/new_request_page.dart';
+import '../screens/road_garbage_screen/road_garbage_page.dart';
 
 class AppRouter {
   static const String landingPage = '/';
@@ -16,6 +18,8 @@ class AppRouter {
   static const String loginPage = '/loginPage';
   static const String registerPage = '/registerPage';
   static const String newRequestPage = '/newRequestPage';
+  static const String homeGarbagePage = '/homeGarbagePage';
+  static const String roadGarbagePage = '/roadGarbagePage';
 
   const AppRouter._();
 
@@ -54,6 +58,20 @@ class AppRouter {
           builder: (_) => BlocProvider(
             create: (context) => LoginCubit(),
             child: const NewRequestPage(),
+          ),
+        );
+      case homeGarbagePage:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => LoginCubit(),
+            child: const HomeGarbagePage(),
+          ),
+        );
+      case roadGarbagePage:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => LoginCubit(),
+            child: const RoadGarbagePage(),
           ),
         );
       default:

@@ -1,7 +1,6 @@
-import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../data/shared/shared_services.dart';
+import '../../../data/shared/shared_auth.dart';
 
 part 'sign_out_state.dart';
 
@@ -11,7 +10,7 @@ class SignOutCubit extends Cubit<SignOutState> {
   Future signOut() async {
     try {
       emit(SignOutSucceed());
-      await SharedServices.removeUser();
+      await SharedAuth.removeUser();
       emit(SignOutSucceed());
     } catch (e) {
       emit(SignOutFailed(errorMsg: e.toString()));

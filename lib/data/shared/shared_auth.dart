@@ -1,6 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SharedServices {
+class SharedAuth {
   static const String uidKey = "uid";
   static const String isDriverKey = "isDriver";
 
