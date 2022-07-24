@@ -10,4 +10,5 @@ class Strings {
   static const landing = '$images/landing.png';
   static const home = '$images/home.png';
   static const road = '$images/road.png';
+  static const capture = '$images/capture.png';
 }

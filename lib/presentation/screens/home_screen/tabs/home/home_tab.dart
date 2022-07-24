@@ -1,15 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:garbage_collection_system/logic/cubit/truck_map_cubit/truck_map_cubit.dart';
 import 'package:sizer/sizer.dart';
-
-import 'package:garbage_collection_system/data/models/app_user.dart';
 
 import '../../../../../core/components/components.dart';
 import '../../../../../core/constants/strings.dart';
 import '../../../../../core/themes/app_colors.dart';
+import '../../../../../data/models/app_user.dart';
 import '../../../../../logic/cubit/sign_out_cubit/sign_out_cubit.dart';
+import '../../../../../logic/cubit/truck_map_cubit/truck_map_cubit.dart';
 import 'widgets/sign_out_view.dart';
 import 'widgets/trucks_map.dart';
 

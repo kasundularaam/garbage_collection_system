@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:garbage_collection_system/core/components/components.dart';
-import 'package:garbage_collection_system/data/models/app_user.dart';
-import 'package:garbage_collection_system/presentation/router/app_router.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../../../../core/components/components.dart';
 import '../../../../../../core/constants/strings.dart';
 import '../../../../../../core/themes/app_colors.dart';
+import '../../../../../../data/models/app_user.dart';
 import '../../../../../../logic/cubit/sign_out_cubit/sign_out_cubit.dart';
+import '../../../../../router/app_router.dart';
 
 class SignOutView extends StatelessWidget {
   final AppUser appUser;

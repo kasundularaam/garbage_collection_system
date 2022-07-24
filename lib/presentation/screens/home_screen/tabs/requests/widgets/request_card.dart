@@ -1,6 +1,6 @@
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:garbage_collection_system/core/components/components.dart';
+import 'package:flutter/material.dart';
+
+import '../../../../../../core/components/components.dart';
 
 class RequestCard extends StatefulWidget {
   const RequestCard({Key? key}) : super(key: key);

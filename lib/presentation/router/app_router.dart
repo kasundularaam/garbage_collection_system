@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/exceptions/route_exception.dart';
 import '../../data/models/app_user.dart';
+import '../../logic/cubit/cubit/home_garbage_cubit.dart';
+import '../../logic/cubit/cubit/road_garbage_cubit/road_garbage_cubit.dart';
 import '../../logic/cubit/landing_cubit/landing_cubit.dart';
 import '../../logic/cubit/login_cubit/login_cubit.dart';
 import '../screens/auth/login_screen/login_page.dart';
@@ -63,14 +65,14 @@ class AppRouter {
       case homeGarbagePage:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => LoginCubit(),
+            create: (context) => HomeGarbageCubit(),
             child: const HomeGarbagePage(),
           ),
         );
       case roadGarbagePage:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => LoginCubit(),
+            create: (context) => RoadGarbageCubit(),
             child: const RoadGarbagePage(),
           ),
         );
