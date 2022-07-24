@@ -6,7 +6,7 @@ class SharedAuth {
 
   static Future<String> getUid() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    String uid = preferences.getString(uidKey) ?? "1";
+    String uid = preferences.getString(uidKey) ?? "";
     return uid;
   }
 
@@ -31,8 +31,6 @@ class SharedAuth {
   static Future<bool> isUserIn() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     final String uid = preferences.getString(uidKey) ?? "";
-    // return uid.isNotEmpty;
-    // return false;
-    return true;
+    return uid.isNotEmpty;
   }
 }

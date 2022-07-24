@@ -23,7 +23,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   login() {
     BlocProvider.of<LoginCubit>(context)
-        .login(nic: emailCtrl.text, password: passwordCtrl.text);
+        .login(email: emailCtrl.text, password: passwordCtrl.text);
   }
 
   @override

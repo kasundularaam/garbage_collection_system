@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:garbage_collection_system/presentation/router/app_router.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/components/components.dart';
 import '../../../core/constants/strings.dart';
 import '../../../core/themes/app_colors.dart';
+import '../../router/app_router.dart';
 
 class NewRequestPage extends StatefulWidget {
   const NewRequestPage({Key? key}) : super(key: key);
@@ -18,26 +18,7 @@ class _NewRequestPageState extends State<NewRequestPage> {
   Widget build(BuildContext context) {
     return page(Column(
       children: [
-        Container(
-          color: AppColors.primaryColor,
-          padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
-          child: Row(
-            children: [
-              IconButton(
-                onPressed: () => navPop(context),
-                icon: const Icon(
-                  Icons.arrow_back_rounded,
-                  color: AppColors.light0,
-                ),
-              ),
-              hSpacer(3),
-              Expanded(
-                child: textL("New Request", 18, bold: true),
-                // child: textL("නව ඉල්ලීම්", 18, bold: true),
-              ),
-            ],
-          ),
-        ),
+        simpleAppBar("New Request", context),
         Expanded(
           child: ListView(
             physics: const BouncingScrollPhysics(),
