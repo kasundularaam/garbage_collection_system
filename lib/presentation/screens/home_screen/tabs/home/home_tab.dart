@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:garbage_collection_system/logic/cubit/truck_map_cubit/truck_map_cubit.dart';
 import 'package:sizer/sizer.dart';
 
 import 'package:garbage_collection_system/data/models/app_user.dart';
@@ -68,7 +69,11 @@ class _HomeTabState extends State<HomeTab> {
                 ],
               ),
             ),
-            const Expanded(child: MapSample()),
+            Expanded(
+                child: BlocProvider(
+              create: (context) => TruckMapCubit(),
+              child: const MapSample(),
+            )),
           ],
         ));
   }
