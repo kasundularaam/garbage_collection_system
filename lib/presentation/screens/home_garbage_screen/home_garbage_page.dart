@@ -52,7 +52,7 @@ class _HomeGarbagePageState extends State<HomeGarbagePage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               textD("Contains", 16, bold: true),
-                              vSpacer(2),
+                              vSpacer(1),
                               Wrap(
                                 spacing: 2.w,
                                 children: state.contents
@@ -70,8 +70,10 @@ class _HomeGarbagePageState extends State<HomeGarbagePage> {
                       WeightCard(
                         onChange: (weight) => {},
                       ),
-                      vSpacer(3),
-                      buttonFilledP("Send", () => {}),
+                      vSpacer(2),
+                      textD("Inform the nearest garbage truck", 12),
+                      vSpacer(1),
+                      buttonFilledP("Send Request", () => {}),
                       vSpacer(3),
                     ],
                   ),
