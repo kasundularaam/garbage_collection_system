@@ -11,7 +11,7 @@ class HomeGarbageCubit extends Cubit<HomeGarbageState> {
     try {
       emit(HomeGarbageLoading());
       await Future.delayed(const Duration(seconds: 2));
-      emit(HomeGarbageLoaded(contents: ["Idiot", "Asshole"]));
+      emit(HomeGarbageLoaded(contents: ["Plastic", "Paper"]));
     } catch (e) {
       emit(HomeGarbageFailed(errorMsg: e.toString()));
     }

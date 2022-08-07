@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:garbage_collection_system/logic/cubit/requests_cubit/requests_cubit.dart';
 import '../../../core/components/components.dart';
 import '../../../core/themes/app_colors.dart';
 import '../../../data/models/app_user.dart';
@@ -36,7 +38,10 @@ class _HomePageState extends State<HomePage> {
 
   static final List<Widget> _widgetOptions = [
     homeTab!,
-    const RequestsTab(),
+    BlocProvider(
+      create: (context) => RequestsCubit(),
+      child: const RequestsTab(),
+    ),
   ];
 
   @override

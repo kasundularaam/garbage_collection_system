@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/components/components.dart';
-import '../../../logic/cubit/cubit/road_garbage_cubit/road_garbage_cubit.dart';
 import '../../../logic/cubit/get_image_cubit/get_image_cubit.dart';
+import '../../../logic/cubit/road_garbage_cubit/road_garbage_cubit.dart';
 import '../widgets/capture_card.dart';
 import '../widgets/weight_card.dart';
 

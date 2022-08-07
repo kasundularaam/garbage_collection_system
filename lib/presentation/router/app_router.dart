@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/exceptions/route_exception.dart';
+import '../../data/http/http_services.dart';
 import '../../data/models/app_user.dart';
-import '../../logic/cubit/cubit/home_garbage_cubit.dart';
-import '../../logic/cubit/cubit/road_garbage_cubit/road_garbage_cubit.dart';
+import '../../logic/cubit/home_garbage_cubit/home_garbage_cubit.dart';
 import '../../logic/cubit/landing_cubit/landing_cubit.dart';
 import '../../logic/cubit/login_cubit/login_cubit.dart';
+import '../../logic/cubit/road_garbage_cubit/road_garbage_cubit.dart';
 import '../screens/auth/login_screen/login_page.dart';
 import '../screens/auth/register_screen/register_page.dart';
 import '../screens/home_garbage_screen/home_garbage_page.dart';
@@ -24,6 +25,8 @@ class AppRouter {
   static const String roadGarbagePage = '/roadGarbagePage';
 
   const AppRouter._();
+
+  static HttpServices httpServices = HttpServices();
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {

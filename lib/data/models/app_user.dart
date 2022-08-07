@@ -2,46 +2,70 @@
 import 'dart:convert';
 
 class AppUser {
-  final String uid;
-  final String name;
+  final int id;
+  final String username;
+  final int mobile_no;
   final String email;
-  final bool isDriver;
+  final String address;
+  final String password;
+  final String nic;
+  final String type;
   AppUser({
-    required this.uid,
-    required this.name,
+    required this.id,
+    required this.username,
+    required this.mobile_no,
     required this.email,
-    required this.isDriver,
+    required this.address,
+    required this.password,
+    required this.nic,
+    required this.type,
   });
 
   AppUser copyWith({
-    String? uid,
-    String? name,
+    int? id,
+    String? username,
+    int? mobile_no,
     String? email,
-    bool? isDriver,
+    String? address,
+    String? password,
+    String? nic,
+    String? type,
   }) {
     return AppUser(
-      uid: uid ?? this.uid,
-      name: name ?? this.name,
+      id: id ?? this.id,
+      username: username ?? this.username,
+      mobile_no: mobile_no ?? this.mobile_no,
       email: email ?? this.email,
-      isDriver: isDriver ?? this.isDriver,
+      address: address ?? this.address,
+      password: password ?? this.password,
+      nic: nic ?? this.nic,
+      type: type ?? this.type,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'uid': uid,
-      'name': name,
+      'id': id,
+      'username': username,
+      'mobile_no': mobile_no,
       'email': email,
-      'isDriver': isDriver,
+      'address': address,
+      'password': password,
+      'nic': nic,
+      'type': type,
     };
   }
 
   factory AppUser.fromMap(Map<String, dynamic> map) {
     return AppUser(
-      uid: map['uid'] as String,
-      name: map['name'] as String,
+      id: map['id'] as int,
+      username: map['username'] as String,
+      mobile_no: map['mobile_no'] as int,
       email: map['email'] as String,
-      isDriver: map['isDriver'] as bool,
+      address: map['address'] as String,
+      password: map['password'] as String,
+      nic: map['nic'] as String,
+      type: map['type'] as String,
     );
   }
 
@@ -52,22 +76,32 @@ class AppUser {
 
   @override
   String toString() {
-    return 'AppUser(uid: $uid, name: $name, email: $email, isDriver: $isDriver)';
+    return 'AppUser(id: $id, username: $username, mobile_no: $mobile_no, email: $email, address: $address, password: $password, nic: $nic, type: $type)';
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(covariant AppUser other) {
     if (identical(this, other)) return true;
 
-    return other is AppUser &&
-        other.uid == uid &&
-        other.name == name &&
+    return other.id == id &&
+        other.username == username &&
+        other.mobile_no == mobile_no &&
         other.email == email &&
-        other.isDriver == isDriver;
+        other.address == address &&
+        other.password == password &&
+        other.nic == nic &&
+        other.type == type;
   }
 
   @override
   int get hashCode {
-    return uid.hashCode ^ name.hashCode ^ email.hashCode ^ isDriver.hashCode;
+    return id.hashCode ^
+        username.hashCode ^
+        mobile_no.hashCode ^
+        email.hashCode ^
+        address.hashCode ^
+        password.hashCode ^
+        nic.hashCode ^
+        type.hashCode;
   }
 }

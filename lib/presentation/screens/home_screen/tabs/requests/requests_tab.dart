@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../../core/components/components.dart';
 import '../../../../../core/themes/app_colors.dart';
+import '../../../../../logic/cubit/requests_cubit/requests_cubit.dart';
+import 'widgets/request_card.dart';
 
 class RequestsTab extends StatefulWidget {
   const RequestsTab({Key? key}) : super(key: key);
@@ -28,42 +31,36 @@ class _RequestsTabState extends State<RequestsTab> {
               ),
             ),
             Expanded(
-                child: ListView(
-              physics: const BouncingScrollPhysics(),
-              padding: EdgeInsets.symmetric(horizontal: 3.w),
-              children: [
-                vSpacer(1),
-                ListView.builder(
-                  itemCount: 5,
-                  physics: const BouncingScrollPhysics(),
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) => Card(
-                    child: Padding(
-                      padding: EdgeInsets.all(3.w),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          textP("Garbage on my home", 16, bold: true),
-                          vSpacer(2),
-                          text("Requested on: 7/9/2022 at: 12:45", 14,
-                              AppColors.dark3),
-                          vSpacer(2),
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 5.w, vertical: 1.h),
-                            decoration: BoxDecoration(
-                                color: AppColors.primaryColor,
-                                borderRadius: BorderRadius.circular(1.w)),
-                            child: Center(
-                                child:
-                                    textL("Garbage Collected", 12, bold: true)),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                )
-              ],
+                child: BlocConsumer<RequestsCubit, RequestsState>(
+              listener: (context, state) {
+                if (state is RequestsFailed) {
+                  showSnackBar(context, state.errorMsg);
+                }
+              },
+              builder: (context, state) {
+                if (state is RequestsLoading) {
+                  return Center(
+                    child: viewSpinner(),
+                  );
+                }
+                if (state is RequestsLoaded) {
+                  return ListView(
+                    physics: const BouncingScrollPhysics(),
+                    padding: EdgeInsets.symmetric(horizontal: 3.w),
+                    children: [
+                      vSpacer(1),
+                      ListView.builder(
+                        itemCount: 5,
+                        physics: const BouncingScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) => RequestCard(
+                            garbageRequest: state.garbageRequests[index]),
+                      )
+                    ],
+                  );
+                }
+                return nothing;
+              },
             )),
           ],
         ));

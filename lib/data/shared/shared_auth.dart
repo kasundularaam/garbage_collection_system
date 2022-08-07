@@ -2,35 +2,36 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedAuth {
   static const String uidKey = "uid";
-  static const String isDriverKey = "isDriver";
+  static const String typeKey = "typeKey";
 
-  static Future<String> getUid() async {
+  static Future<int> getUid() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    String uid = preferences.getString(uidKey) ?? "";
+    int uid = preferences.getInt(uidKey) ?? -1;
     return uid;
   }
 
   static Future<bool> isDriver() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    bool isDriver = preferences.getBool(isDriverKey) ?? false;
-    return isDriver;
+    String type = preferences.getString(typeKey) ?? "USER";
+    if (type == "USER") return false;
+    return true;
   }
 
-  static Future addUser({required String uid, required bool isDriver}) async {
+  static Future addUser({required int uid, required String type}) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    preferences.setString(uidKey, uid);
-    preferences.setBool(isDriverKey, isDriver);
+    preferences.setInt(uidKey, uid);
+    preferences.setString(typeKey, type);
   }
 
   static Future removeUser() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.remove(uidKey);
-    preferences.remove(isDriverKey);
+    preferences.remove(typeKey);
   }
 
   static Future<bool> isUserIn() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    final String uid = preferences.getString(uidKey) ?? "";
-    return uid.isNotEmpty;
+    final int uid = preferences.getInt(uidKey) ?? -1;
+    return uid == -1 ? false : true;
   }
 }

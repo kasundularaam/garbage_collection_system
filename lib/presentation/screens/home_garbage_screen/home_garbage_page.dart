@@ -4,8 +4,8 @@ import 'package:sizer/sizer.dart';
 
 import '../../../core/components/components.dart';
 import '../../../core/themes/app_colors.dart';
-import '../../../logic/cubit/cubit/home_garbage_cubit.dart';
 import '../../../logic/cubit/get_image_cubit/get_image_cubit.dart';
+import '../../../logic/cubit/home_garbage_cubit/home_garbage_cubit.dart';
 import '../widgets/capture_card.dart';
 import '../widgets/weight_card.dart';
 

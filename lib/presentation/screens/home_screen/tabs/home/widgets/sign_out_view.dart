@@ -38,10 +38,10 @@ class SignOutView extends StatelessWidget {
           ),
           Row(
             children: [
-              textD("Name: ", 16),
+              textD("Username: ", 16),
               vSpacer(2),
               Expanded(
-                child: textD(appUser.name, 16),
+                child: textD(appUser.username, 16),
               ),
             ],
           ),
