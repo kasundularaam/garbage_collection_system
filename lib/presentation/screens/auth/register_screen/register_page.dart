@@ -6,7 +6,8 @@ import 'package:sizer/sizer.dart';
 import '../../../../core/components/components.dart';
 import '../../../../core/constants/strings.dart';
 import '../../../../core/themes/app_colors.dart';
-import '../../../../logic/cubit/login_cubit/login_cubit.dart';
+import '../../../../data/models/register_req.dart';
+import '../../../../logic/cubit/register_cubit/register_cubit.dart';
 import '../../../router/app_router.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -17,13 +18,23 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  TextEditingController nameCtrl = TextEditingController();
+  TextEditingController usernameCtrl = TextEditingController();
   TextEditingController emailCtrl = TextEditingController();
+  TextEditingController mobileCtrl = TextEditingController();
   TextEditingController passwordCtrl = TextEditingController();
+  TextEditingController addressCtrl = TextEditingController();
+  TextEditingController nicCtrl = TextEditingController();
 
-  login() {
-    BlocProvider.of<LoginCubit>(context)
-        .login(email: emailCtrl.text, password: passwordCtrl.text);
+  register() {
+    BlocProvider.of<RegisterCubit>(context).register(
+        registerReq: RegisterReq(
+            username: usernameCtrl.text,
+            mobileNo: int.parse(mobileCtrl.text),
+            email: emailCtrl.text,
+            address: addressCtrl.text,
+            password: passwordCtrl.text,
+            nic: nicCtrl.text,
+            type: "USER"));
   }
 
   @override
@@ -53,29 +64,35 @@ class _RegisterPageState extends State<RegisterPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  inputPassword(nameCtrl, label: "Name"),
+                  inputName(usernameCtrl, label: "Username"),
                   vSpacer(3),
                   inputEmail(emailCtrl, label: "Email"),
                   vSpacer(3),
+                  inputText(addressCtrl, label: "Address"),
+                  vSpacer(3),
+                  inputPhone(mobileCtrl, label: "Mobile"),
+                  vSpacer(3),
+                  inputText(nicCtrl, label: "Nic"),
+                  vSpacer(3),
                   inputPassword(passwordCtrl, label: "Password"),
                   vSpacer(3),
-                  BlocConsumer<LoginCubit, LoginState>(
+                  BlocConsumer<RegisterCubit, RegisterState>(
                     listener: (context, state) {
-                      if (state is LoginSucceed) {
+                      if (state is RegisterSucceed) {
                         navAndClear(context, AppRouter.landingPage);
                       }
-                      if (state is LoginFailed) {
+                      if (state is RegisterFailed) {
                         showSnackBar(context, state.errorMsg);
                       }
                     },
                     builder: (context, state) {
-                      if (state is LoginLoading) {
+                      if (state is RegisterLoading) {
                         return const Center(
                           child: CircularProgressIndicator(
                               color: AppColors.primaryColor),
                         );
                       }
-                      return buttonFilledP("Register", () => login());
+                      return buttonFilledP("Register", () => register());
                     },
                   ),
                   vSpacer(5),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:garbage_collection_system/logic/cubit/register_cubit/register_cubit.dart';
 import '../../core/exceptions/route_exception.dart';
 import '../../data/http/http_services.dart';
 import '../../data/models/app_user.dart';
@@ -54,7 +55,7 @@ class AppRouter {
       case registerPage:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => LoginCubit(),
+            create: (context) => RegisterCubit(),
             child: const RegisterPage(),
           ),
         );

@@ -1,7 +1,7 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-class AppUser {
-  final int id;
+class RegisterReq {
   final String username;
   final int mobileNo;
   final String email;
@@ -9,8 +9,7 @@ class AppUser {
   final String password;
   final String nic;
   final String type;
-  AppUser({
-    required this.id,
+  RegisterReq({
     required this.username,
     required this.mobileNo,
     required this.email,
@@ -20,8 +19,7 @@ class AppUser {
     required this.type,
   });
 
-  AppUser copyWith({
-    int? id,
+  RegisterReq copyWith({
     String? username,
     int? mobileNo,
     String? email,
@@ -30,8 +28,7 @@ class AppUser {
     String? nic,
     String? type,
   }) {
-    return AppUser(
-      id: id ?? this.id,
+    return RegisterReq(
       username: username ?? this.username,
       mobileNo: mobileNo ?? this.mobileNo,
       email: email ?? this.email,
@@ -44,7 +41,6 @@ class AppUser {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
       'username': username,
       'mobile_no': mobileNo,
       'email': email,
@@ -55,9 +51,8 @@ class AppUser {
     };
   }
 
-  factory AppUser.fromMap(Map<String, dynamic> map) {
-    return AppUser(
-      id: map['id'] as int,
+  factory RegisterReq.fromMap(Map<String, dynamic> map) {
+    return RegisterReq(
       username: map['username'] as String,
       mobileNo: map['mobile_no'] as int,
       email: map['email'] as String,
@@ -70,20 +65,19 @@ class AppUser {
 
   String toJson() => json.encode(toMap());
 
-  factory AppUser.fromJson(String source) =>
-      AppUser.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory RegisterReq.fromJson(String source) =>
+      RegisterReq.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
-    return 'AppUser(id: $id, username: $username, mobileNo: $mobileNo, email: $email, address: $address, password: $password, nic: $nic, type: $type)';
+    return 'RegisterReq(username: $username, mobileNo: $mobileNo, email: $email, address: $address, password: $password, nic: $nic, type: $type)';
   }
 
   @override
-  bool operator ==(covariant AppUser other) {
+  bool operator ==(covariant RegisterReq other) {
     if (identical(this, other)) return true;
 
-    return other.id == id &&
-        other.username == username &&
+    return other.username == username &&
         other.mobileNo == mobileNo &&
         other.email == email &&
         other.address == address &&
@@ -94,8 +88,7 @@ class AppUser {
 
   @override
   int get hashCode {
-    return id.hashCode ^
-        username.hashCode ^
+    return username.hashCode ^
         mobileNo.hashCode ^
         email.hashCode ^
         address.hashCode ^

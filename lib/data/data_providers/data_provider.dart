@@ -6,4 +6,5 @@ class DataProvider {
   static String get users => "$url/api/users";
 
   static String get login => "$url/auth/login/";
+  static String get register => "$url/auth/register/";
 }
