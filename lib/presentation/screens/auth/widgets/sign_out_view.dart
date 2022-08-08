@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../../../../../core/components/components.dart';
-import '../../../../../../../core/constants/strings.dart';
-import '../../../../../../../core/themes/app_colors.dart';
-import '../../../../../../../data/models/app_user.dart';
-import '../../../../../../../logic/cubit/sign_out_cubit/sign_out_cubit.dart';
-import '../../../../../../router/app_router.dart';
+import '../../../../core/components/components.dart';
+import '../../../../core/constants/strings.dart';
+import '../../../../core/themes/app_colors.dart';
+import '../../../../data/models/app_user.dart';
+import '../../../../logic/cubit/sign_out_cubit/sign_out_cubit.dart';
+import '../../../router/app_router.dart';
 
 class SignOutView extends StatelessWidget {
   final AppUser appUser;

@@ -11,7 +11,7 @@ class SendRequestCubit extends Cubit<SendRequestState> {
   Future sendRequest({required GarbageRequest request}) async {
     try {
       emit(SendRequestSending());
-      await Future.delayed(Duration(seconds: 2));
+      await Future.delayed(const Duration(seconds: 2));
       GarbageRequest garbageRequest = await AppRouter.httpServices
           .createGarbageRequest(garbageRequest: request);
       emit(SendRequestSent(garbageRequest: garbageRequest));

@@ -2,31 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../../../../core/components/components.dart';
-import '../../../../../../core/constants/strings.dart';
-import '../../../../../../core/themes/app_colors.dart';
-import '../../../../../../data/models/app_user.dart';
-import '../../../../../../logic/cubit/sign_out_cubit/sign_out_cubit.dart';
-import '../../../../../../logic/cubit/truck_map_cubit/truck_map_cubit.dart';
-import '../../../../auth/widgets/sign_out_view.dart';
-import 'widgets/trucks_map.dart';
+import '../../../../core/components/components.dart';
+import '../../../../core/constants/strings.dart';
+import '../../../../core/themes/app_colors.dart';
+import '../../../../data/models/app_user.dart';
+import '../../../../logic/cubit/sign_out_cubit/sign_out_cubit.dart';
+import '../../../../logic/cubit/truck_map_cubit/truck_map_cubit.dart';
+import '../../auth/widgets/sign_out_view.dart';
+import 'widgets/garbage_map.dart';
 
-class HomeTab extends StatefulWidget {
+class DriverHomePage extends StatefulWidget {
   final AppUser appUser;
-  const HomeTab({
+  const DriverHomePage({
     Key? key,
     required this.appUser,
   }) : super(key: key);
 
   @override
-  State<HomeTab> createState() => _HomeTabState();
+  State<DriverHomePage> createState() => _DriverHomePageState();
 }
 
-class _HomeTabState extends State<HomeTab> {
+class _DriverHomePageState extends State<DriverHomePage> {
   AppUser get appUser => widget.appUser;
+
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return page(
+      Container(
         color: AppColors.light1,
         child: Column(
           children: [
@@ -70,9 +72,11 @@ class _HomeTabState extends State<HomeTab> {
             Expanded(
                 child: BlocProvider(
               create: (context) => TruckMapCubit(),
-              child: const TrucksMap(),
+              child: const GarbageMap(),
             )),
           ],
-        ));
+        ),
+      ),
+    );
   }
 }

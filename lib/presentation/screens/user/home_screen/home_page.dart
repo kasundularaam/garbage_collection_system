@@ -8,18 +8,18 @@ import '../../../router/app_router.dart';
 import 'tabs/home/home_tab.dart';
 import 'tabs/requests/requests_tab.dart';
 
-class HomePage extends StatefulWidget {
+class UserHomePage extends StatefulWidget {
   final AppUser appUser;
-  const HomePage({
+  const UserHomePage({
     Key? key,
     required this.appUser,
   }) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<UserHomePage> createState() => _UserHomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _UserHomePageState extends State<UserHomePage> {
   AppUser get appUser => widget.appUser;
   int _selectedIndex = 0;
   static HomeTab? homeTab;

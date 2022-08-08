@@ -10,6 +10,7 @@ import '../../logic/cubit/register_cubit/register_cubit.dart';
 import '../../logic/cubit/road_garbage_cubit/road_garbage_cubit.dart';
 import '../screens/auth/login_screen/login_page.dart';
 import '../screens/auth/register_screen/register_page.dart';
+import '../screens/driver/home_screen/home_page.dart';
 import '../screens/landing_screen/landing_page.dart';
 import '../screens/user/home_garbage_screen/home_garbage_page.dart';
 import '../screens/user/home_screen/home_page.dart';
@@ -18,7 +19,8 @@ import '../screens/user/road_garbage_screen/road_garbage_page.dart';
 
 class AppRouter {
   static const String landingPage = '/';
-  static const String homePage = '/homePage';
+  static const String userHomePage = '/userHomePage';
+  static const String driverHomePage = '/driverHomePage';
   static const String loginPage = '/loginPage';
   static const String registerPage = '/registerPage';
   static const String newRequestPage = '/newRequestPage';
@@ -38,10 +40,17 @@ class AppRouter {
             child: const LandingPage(),
           ),
         );
-      case homePage:
+      case userHomePage:
         final AppUser appUser = settings.arguments as AppUser;
         return MaterialPageRoute(
-          builder: (_) => HomePage(
+          builder: (_) => UserHomePage(
+            appUser: appUser,
+          ),
+        );
+      case driverHomePage:
+        final AppUser appUser = settings.arguments as AppUser;
+        return MaterialPageRoute(
+          builder: (_) => DriverHomePage(
             appUser: appUser,
           ),
         );

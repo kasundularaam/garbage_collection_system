@@ -7,9 +7,9 @@ class LandingInitial extends LandingState {}
 
 class LandingLoading extends LandingState {}
 
-class LandingToHome extends LandingState {
+class LandingToUser extends LandingState {
   final AppUser appUser;
-  LandingToHome({
+  LandingToUser({
     required this.appUser,
   });
 
@@ -17,7 +17,7 @@ class LandingToHome extends LandingState {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is LandingToHome && other.appUser == appUser;
+    return other is LandingToUser && other.appUser == appUser;
   }
 
   @override
@@ -25,6 +25,26 @@ class LandingToHome extends LandingState {
 
   @override
   String toString() => 'LandingToHome(appUser: $appUser)';
+}
+
+class LandingToDriver extends LandingState {
+  final AppUser appUser;
+  LandingToDriver({
+    required this.appUser,
+  });
+
+  @override
+  bool operator ==(covariant LandingToDriver other) {
+    if (identical(this, other)) return true;
+
+    return other.appUser == appUser;
+  }
+
+  @override
+  int get hashCode => appUser.hashCode;
+
+  @override
+  String toString() => 'LandingToDriver(appUser: $appUser)';
 }
 
 class LandingToAuth extends LandingState {}

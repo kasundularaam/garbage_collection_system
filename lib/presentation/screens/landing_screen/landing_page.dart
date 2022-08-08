@@ -26,8 +26,11 @@ class _LandingPageState extends State<LandingPage> {
         if (state is LandingToAuth) {
           navAndClear(context, AppRouter.loginPage);
         }
-        if (state is LandingToHome) {
-          navAndClear(context, AppRouter.homePage, args: state.appUser);
+        if (state is LandingToUser) {
+          navAndClear(context, AppRouter.userHomePage, args: state.appUser);
+        }
+        if (state is LandingToDriver) {
+          navAndClear(context, AppRouter.userHomePage, args: state.appUser);
         }
       },
       child: page(

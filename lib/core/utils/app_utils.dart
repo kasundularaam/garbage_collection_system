@@ -4,8 +4,6 @@ import 'dart:typed_data';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import '../constants/strings.dart';
-
 Future<Uint8List> getBytesFromAsset(String path, int width) async {
   ByteData data = await rootBundle.load(path);
   ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
@@ -18,9 +16,10 @@ Future<Uint8List> getBytesFromAsset(String path, int width) async {
 
 Future<Marker> getMarker(
     {required String markerId,
+    required String icon,
     required LatLng latLng,
     required String info}) async {
-  final Uint8List markerIcon = await getBytesFromAsset(Strings.truck, 100);
+  final Uint8List markerIcon = await getBytesFromAsset(icon, 100);
   final Marker marker = Marker(
       markerId: MarkerId(markerId),
       position: latLng,

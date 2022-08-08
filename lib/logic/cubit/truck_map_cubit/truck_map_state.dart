@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'truck_map_cubit.dart';
 
 @immutable
@@ -8,27 +9,12 @@ class TruckMapInitial extends TruckMapState {}
 class TruckMapLoading extends TruckMapState {}
 
 class TruckMapLoaded extends TruckMapState {
-  final Set<Marker> trucks;
+  final Set<Marker> markers;
   final LatLng userLocation;
   TruckMapLoaded({
-    required this.trucks,
+    required this.markers,
     required this.userLocation,
   });
-
-  @override
-  bool operator ==(covariant TruckMapLoaded other) {
-    if (identical(this, other)) return true;
-
-    return setEquals(other.trucks, trucks) &&
-        other.userLocation == userLocation;
-  }
-
-  @override
-  int get hashCode => trucks.hashCode ^ userLocation.hashCode;
-
-  @override
-  String toString() =>
-      'TruckMapLoaded(trucks: $trucks, userLocation: $userLocation)';
 }
 
 class TruckMapFailed extends TruckMapState {
