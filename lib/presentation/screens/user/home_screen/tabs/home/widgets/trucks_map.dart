@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import '../../../../../../core/components/components.dart';
-import '../../../../../../logic/cubit/truck_map_cubit/truck_map_cubit.dart';
+import '../../../../../../../core/components/components.dart';
+import '../../../../../../../logic/cubit/truck_map_cubit/truck_map_cubit.dart';
 
 class MapSample extends StatefulWidget {
   const MapSample({Key? key}) : super(key: key);

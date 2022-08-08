@@ -2,9 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../../../../core/components/components.dart';
-import '../../../../../../core/themes/app_colors.dart';
-import '../../../../../../data/models/garbage_request.dart';
+import '../../../../../../../core/components/components.dart';
+import '../../../../../../../core/themes/app_colors.dart';
+import '../../../../../../../data/models/garbage_request.dart';
 
 class RequestCard extends StatefulWidget {
   final GarbageRequest garbageRequest;

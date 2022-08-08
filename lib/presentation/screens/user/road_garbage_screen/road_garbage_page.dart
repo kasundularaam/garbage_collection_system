@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../core/components/components.dart';
-import '../../../logic/cubit/get_image_cubit/get_image_cubit.dart';
-import '../../../logic/cubit/road_garbage_cubit/road_garbage_cubit.dart';
-import '../widgets/capture_card.dart';
-import '../widgets/weight_card.dart';
+import '../../../../core/components/components.dart';
+import '../../../../logic/cubit/get_image_cubit/get_image_cubit.dart';
+import '../../../../logic/cubit/road_garbage_cubit/road_garbage_cubit.dart';
+import '../../widgets/capture_card.dart';
+import '../../widgets/weight_card.dart';
 
 class RoadGarbagePage extends StatefulWidget {
   const RoadGarbagePage({Key? key}) : super(key: key);

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:garbage_collection_system/logic/cubit/requests_cubit/requests_cubit.dart';
-import '../../../core/components/components.dart';
-import '../../../core/themes/app_colors.dart';
-import '../../../data/models/app_user.dart';
-import '../../router/app_router.dart';
+import '../../../../core/components/components.dart';
+import '../../../../core/themes/app_colors.dart';
+import '../../../../data/models/app_user.dart';
+import '../../../../logic/cubit/requests_cubit/requests_cubit.dart';
+import '../../../router/app_router.dart';
 import 'tabs/home/home_tab.dart';
 import 'tabs/requests/requests_tab.dart';
 

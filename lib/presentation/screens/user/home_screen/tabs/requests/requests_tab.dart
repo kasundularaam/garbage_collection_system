@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../../../core/components/components.dart';
-import '../../../../../core/themes/app_colors.dart';
-import '../../../../../logic/cubit/requests_cubit/requests_cubit.dart';
+import '../../../../../../core/components/components.dart';
+import '../../../../../../core/themes/app_colors.dart';
+import '../../../../../../logic/cubit/requests_cubit/requests_cubit.dart';
 import 'widgets/request_card.dart';
 
 class RequestsTab extends StatefulWidget {

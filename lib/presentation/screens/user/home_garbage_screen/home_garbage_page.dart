@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../core/components/components.dart';
-import '../../../core/themes/app_colors.dart';
-import '../../../logic/cubit/get_image_cubit/get_image_cubit.dart';
-import '../../../logic/cubit/home_garbage_cubit/home_garbage_cubit.dart';
-import '../widgets/capture_card.dart';
-import '../widgets/weight_card.dart';
+import '../../../../core/components/components.dart';
+import '../../../../core/themes/app_colors.dart';
+import '../../../../logic/cubit/get_image_cubit/get_image_cubit.dart';
+import '../../../../logic/cubit/home_garbage_cubit/home_garbage_cubit.dart';
+import '../../widgets/capture_card.dart';
+import '../../widgets/weight_card.dart';
 
 class HomeGarbagePage extends StatefulWidget {
   const HomeGarbagePage({Key? key}) : super(key: key);
