@@ -1,7 +1,6 @@
 import 'dart:convert';
 
-class GarbageRequest {
-  final int id;
+class GarbageRequestReq {
   final String user;
   final int mobileNo;
   final String garbageType;
@@ -9,8 +8,7 @@ class GarbageRequest {
   final double longitude;
   final double latitude;
   final String status;
-  GarbageRequest({
-    required this.id,
+  GarbageRequestReq({
     required this.user,
     required this.mobileNo,
     required this.garbageType,
@@ -20,8 +18,7 @@ class GarbageRequest {
     required this.status,
   });
 
-  GarbageRequest copyWith({
-    int? id,
+  GarbageRequestReq copyWith({
     String? user,
     int? mobileNo,
     String? garbageType,
@@ -30,8 +27,7 @@ class GarbageRequest {
     double? latitude,
     String? status,
   }) {
-    return GarbageRequest(
-      id: id ?? this.id,
+    return GarbageRequestReq(
       user: user ?? this.user,
       mobileNo: mobileNo ?? this.mobileNo,
       garbageType: garbageType ?? this.garbageType,
@@ -44,10 +40,9 @@ class GarbageRequest {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
       'user': user,
-      'mobile_no': mobileNo,
-      'garbage_type': garbageType,
+      'mobileNo': mobileNo,
+      'garbageType': garbageType,
       'location': location,
       'longitude': longitude,
       'latitude': latitude,
@@ -55,12 +50,11 @@ class GarbageRequest {
     };
   }
 
-  factory GarbageRequest.fromMap(Map<String, dynamic> map) {
-    return GarbageRequest(
-      id: map['id'] as int,
+  factory GarbageRequestReq.fromMap(Map<String, dynamic> map) {
+    return GarbageRequestReq(
       user: map['user'] as String,
-      mobileNo: map['mobile_no'] as int,
-      garbageType: map['garbage_type'] as String,
+      mobileNo: map['mobileNo'] as int,
+      garbageType: map['garbageType'] as String,
       location: map['location'] as String,
       longitude: map['longitude'] as double,
       latitude: map['latitude'] as double,
@@ -70,20 +64,19 @@ class GarbageRequest {
 
   String toJson() => json.encode(toMap());
 
-  factory GarbageRequest.fromJson(String source) =>
-      GarbageRequest.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory GarbageRequestReq.fromJson(String source) =>
+      GarbageRequestReq.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
-    return 'GarbageRequest(id: $id, user: $user, mobileNo: $mobileNo, garbageType: $garbageType, location: $location, longitude: $longitude, latitude: $latitude, status: $status)';
+    return 'GarbageRequestReq(user: $user, mobileNo: $mobileNo, garbageType: $garbageType, location: $location, longitude: $longitude, latitude: $latitude, status: $status)';
   }
 
   @override
-  bool operator ==(covariant GarbageRequest other) {
+  bool operator ==(covariant GarbageRequestReq other) {
     if (identical(this, other)) return true;
 
-    return other.id == id &&
-        other.user == user &&
+    return other.user == user &&
         other.mobileNo == mobileNo &&
         other.garbageType == garbageType &&
         other.location == location &&
@@ -94,8 +87,7 @@ class GarbageRequest {
 
   @override
   int get hashCode {
-    return id.hashCode ^
-        user.hashCode ^
+    return user.hashCode ^
         mobileNo.hashCode ^
         garbageType.hashCode ^
         location.hashCode ^

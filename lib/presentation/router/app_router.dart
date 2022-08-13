@@ -8,6 +8,7 @@ import '../../logic/cubit/landing_cubit/landing_cubit.dart';
 import '../../logic/cubit/login_cubit/login_cubit.dart';
 import '../../logic/cubit/register_cubit/register_cubit.dart';
 import '../../logic/cubit/road_garbage_cubit/road_garbage_cubit.dart';
+import '../../logic/cubit/send_request_cubit/send_request_cubit.dart';
 import '../screens/auth/login_screen/login_page.dart';
 import '../screens/auth/register_screen/register_page.dart';
 import '../screens/driver/home_screen/home_page.dart';
@@ -77,15 +78,23 @@ class AppRouter {
         );
       case homeGarbagePage:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => HomeGarbageCubit(),
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => HomeGarbageCubit(),
+              ),
+            ],
             child: const HomeGarbagePage(),
           ),
         );
       case roadGarbagePage:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => RoadGarbageCubit(),
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => RoadGarbageCubit(),
+              ),
+            ],
             child: const RoadGarbagePage(),
           ),
         );

@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
@@ -8,6 +7,7 @@ import '../data_providers/data_provider.dart';
 import '../models/app_user.dart';
 
 import '../models/garbage_request.dart';
+import '../models/garbage_request_req.dart';
 import '../models/login_res.dart';
 import '../models/register_req.dart';
 
@@ -25,7 +25,7 @@ class HttpServices {
   Future<AppUser> getUser({required int id}) async {
     try {
       Response response = await dio.get(DataProvider.user(id));
-      return AppUser.fromJson(response.toString());
+      return AppUser.fromMap(response.data);
     } catch (e) {
       throw e.toString();
     }
@@ -35,7 +35,7 @@ class HttpServices {
     try {
       Response response =
           await dio.post(DataProvider.register, data: registerReq.toMap());
-      return AppUser.fromJson(response.toString());
+      return AppUser.fromMap(response.data);
     } catch (e) {
       throw e.toString();
     }
@@ -58,12 +58,15 @@ class HttpServices {
   }
 
   Future<GarbageRequest> createGarbageRequest(
-      {required GarbageRequest garbageRequest}) async {
+      {required GarbageRequestReq garbageRequestReq}) async {
     try {
-      Response response = await dio.post(DataProvider.users);
-      garbageRequests.add(garbageRequest);
-      return garbageRequest;
+      log(garbageRequestReq.toString());
+      Response response = await dio.post(DataProvider.requests,
+          data: garbageRequestReq.toMap());
+      log(response.toString());
+      return GarbageRequest.fromMap(response.data);
     } catch (e) {
+      log(e.toString());
       throw e.toString();
     }
   }
@@ -76,8 +79,6 @@ class HttpServices {
           resData.map((map) => GarbageRequest.fromMap(map)).toList();
       return requests;
     } catch (e) {
-      log(e.toString());
-
       throw e.toString();
     }
   }

@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -36,7 +34,6 @@ class _CaptureCardState extends State<CaptureCard> {
               borderRadius: BorderRadius.circular(2.w),
               child: BlocConsumer<GetImageCubit, GetImageState>(
                 listener: (context, state) {
-                  log(state.toString());
                   if (state is GetImageFailed) {
                     showSnackBar(context, state.errorMsg);
                   }

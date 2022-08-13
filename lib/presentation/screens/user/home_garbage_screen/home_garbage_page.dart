@@ -4,9 +4,13 @@ import 'package:sizer/sizer.dart';
 
 import '../../../../core/components/components.dart';
 import '../../../../core/themes/app_colors.dart';
+import '../../../../data/models/app_user.dart';
+import '../../../../data/models/garbage_request_req.dart';
 import '../../../../logic/cubit/get_image_cubit/get_image_cubit.dart';
 import '../../../../logic/cubit/home_garbage_cubit/home_garbage_cubit.dart';
+import '../../../../logic/cubit/send_request_cubit/send_request_cubit.dart';
 import '../../widgets/capture_card.dart';
+import '../../widgets/request_button.dart';
 import '../../widgets/weight_card.dart';
 
 class HomeGarbagePage extends StatefulWidget {
@@ -17,6 +21,8 @@ class HomeGarbagePage extends StatefulWidget {
 }
 
 class _HomeGarbagePageState extends State<HomeGarbagePage> {
+  GarbageRequestReq? requestReq;
+
   @override
   Widget build(BuildContext context) {
     return page(
@@ -30,7 +36,20 @@ class _HomeGarbagePageState extends State<HomeGarbagePage> {
                   .loadHomeGarbage(image: image),
             ),
           ),
-          BlocBuilder<HomeGarbageCubit, HomeGarbageState>(
+          BlocConsumer<HomeGarbageCubit, HomeGarbageState>(
+            listener: (context, state) {
+              if (state is HomeGarbageLoaded) {
+                AppUser user = state.appUser;
+                requestReq = GarbageRequestReq(
+                    user: "${user.id}",
+                    mobileNo: user.mobileNo,
+                    garbageType: state.contents.toString(),
+                    location: "Home",
+                    longitude: state.longitude,
+                    latitude: state.latitude,
+                    status: "PENDING");
+              }
+            },
             builder: (context, state) {
               if (state is HomeGarbageLoading) {
                 return Expanded(
@@ -73,7 +92,12 @@ class _HomeGarbagePageState extends State<HomeGarbagePage> {
                       vSpacer(2),
                       textD("Inform the nearest garbage truck", 12),
                       vSpacer(1),
-                      buttonFilledP("Send Request", () => {}),
+                      BlocProvider(
+                        create: (context) => SendRequestCubit(),
+                        child: RequestButton(
+                          request: requestReq!,
+                        ),
+                      ),
                       vSpacer(3),
                     ],
                   ),

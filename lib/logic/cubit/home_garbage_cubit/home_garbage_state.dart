@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'home_garbage_cubit.dart';
 
 abstract class HomeGarbageState {}
@@ -8,12 +9,15 @@ class HomeGarbageLoading extends HomeGarbageState {}
 
 class HomeGarbageLoaded extends HomeGarbageState {
   final List<String> contents;
+  final AppUser appUser;
+  final double latitude;
+  final double longitude;
   HomeGarbageLoaded({
     required this.contents,
+    required this.appUser,
+    required this.latitude,
+    required this.longitude,
   });
-
-  @override
-  String toString() => 'HomeGarbageLoaded(contents: $contents)';
 }
 
 class HomeGarbageFailed extends HomeGarbageState {
