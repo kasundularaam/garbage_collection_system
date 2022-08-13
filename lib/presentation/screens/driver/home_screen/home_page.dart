@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:garbage_collection_system/logic/cubit/garbage_map_cubit/garbage_map_cubit.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../core/components/components.dart';
@@ -70,10 +71,11 @@ class _DriverHomePageState extends State<DriverHomePage> {
               ),
             ),
             Expanded(
-                child: BlocProvider(
-              create: (context) => TruckMapCubit(),
-              child: const GarbageMap(),
-            )),
+              child: BlocProvider(
+                create: (context) => GarbageMapCubit(),
+                child: const GarbageMap(),
+              ),
+            ),
           ],
         ),
       ),

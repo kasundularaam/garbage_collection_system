@@ -71,13 +71,32 @@ class HttpServices {
     }
   }
 
-  Future<List<GarbageRequest>> getGarbageRequests({required int uid}) async {
+  Future<List<GarbageRequest>> getGarbageRequestsById(
+      {required int uid}) async {
     try {
       Response response = await dio.get(DataProvider.requests);
       List<dynamic> resData = response.data;
       List<GarbageRequest> requests =
           resData.map((map) => GarbageRequest.fromMap(map)).toList();
       return requests;
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
+  Future<List<GarbageRequest>> getNewGarbageRequests() async {
+    try {
+      Response response = await dio.get(DataProvider.requests);
+      List<dynamic> resData = response.data;
+      List<GarbageRequest> requests =
+          resData.map((map) => GarbageRequest.fromMap(map)).toList();
+      List<GarbageRequest> pendingRequests = [];
+      for (var req in requests) {
+        if (req.status == "PENDING") {
+          pendingRequests.add(req);
+        }
+      }
+      return pendingRequests;
     } catch (e) {
       throw e.toString();
     }

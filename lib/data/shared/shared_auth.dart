@@ -13,7 +13,7 @@ class SharedAuth {
   static Future<bool> isDriver() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     String type = preferences.getString(typeKey) ?? "USER";
-    // if (type == "USER") return false;
+    if (type == "USER") return false;
     return true;
   }
 

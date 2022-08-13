@@ -15,7 +15,7 @@ class RequestsCubit extends Cubit<RequestsState> {
       emit(RequestsLoading());
       final int uid = await SharedAuth.getUid();
       final List<GarbageRequest> garbageRequests =
-          await AppRouter.httpServices.getGarbageRequests(uid: uid);
+          await AppRouter.httpServices.getGarbageRequestsById(uid: uid);
       emit(RequestsLoaded(garbageRequests: garbageRequests));
     } catch (e) {
       emit(RequestsFailed(errorMsg: e.toString()));

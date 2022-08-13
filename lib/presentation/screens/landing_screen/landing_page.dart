@@ -30,7 +30,7 @@ class _LandingPageState extends State<LandingPage> {
           navAndClear(context, AppRouter.userHomePage, args: state.appUser);
         }
         if (state is LandingToDriver) {
-          navAndClear(context, AppRouter.userHomePage, args: state.appUser);
+          navAndClear(context, AppRouter.driverHomePage, args: state.appUser);
         }
       },
       child: page(

@@ -83,6 +83,9 @@ class AppRouter {
               BlocProvider(
                 create: (context) => HomeGarbageCubit(),
               ),
+              BlocProvider(
+                create: (context) => SendRequestCubit(),
+              )
             ],
             child: const HomeGarbagePage(),
           ),
