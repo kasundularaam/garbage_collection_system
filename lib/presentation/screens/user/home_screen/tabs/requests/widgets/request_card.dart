@@ -19,6 +19,7 @@ class RequestCard extends StatefulWidget {
 
 class _RequestCardState extends State<RequestCard> {
   GarbageRequest get garbageRequest => widget.garbageRequest;
+  bool get collected => garbageRequest.status == "DONE";
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -27,16 +28,36 @@ class _RequestCardState extends State<RequestCard> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            textP("Garbage on my home", 16, bold: true),
+            textP("Garbage on ${garbageRequest.location}", 16, bold: true),
             vSpacer(2),
-            text("Requested on: 7/9/2022 at: 12:45", 14, AppColors.dark3),
+            text("Type: ${garbageRequest.garbageType}", 14, AppColors.dark3),
             vSpacer(2),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 1.h),
+              padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 1.5.h),
               decoration: BoxDecoration(
-                  color: AppColors.primaryColor,
+                  color:
+                      collected ? AppColors.collectedBg : AppColors.pendingBg,
                   borderRadius: BorderRadius.circular(1.w)),
-              child: Center(child: textL("Garbage Collected", 12, bold: true)),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: collected
+                        ? text("Collected", 14, bold: true, AppColors.collected)
+                        : text("Pending", 14, bold: true, AppColors.pending),
+                  ),
+                  collected
+                      ? Icon(
+                          Icons.check_circle_rounded,
+                          size: 22.sp,
+                          color: AppColors.collected,
+                        )
+                      : Icon(
+                          Icons.pending_rounded,
+                          size: 22.sp,
+                          color: AppColors.pending,
+                        )
+                ],
+              ),
             )
           ],
         ),

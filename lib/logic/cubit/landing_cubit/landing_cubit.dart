@@ -18,7 +18,7 @@ class LandingCubit extends Cubit<LandingState> {
       if (isUserIn) {
         final int uid = await SharedAuth.getUid();
         final bool isDriver = await SharedAuth.isDriver();
-        AppUser appUser = await AppRouter.httpServices.getUser(uid: uid);
+        AppUser appUser = await AppRouter.httpServices.getUser(id: uid);
         if (isDriver) {
           emit(LandingToDriver(appUser: appUser));
         } else {

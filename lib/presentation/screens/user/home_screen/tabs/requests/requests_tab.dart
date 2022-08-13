@@ -17,6 +17,7 @@ class RequestsTab extends StatefulWidget {
 class _RequestsTabState extends State<RequestsTab> {
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<RequestsCubit>(context).loadRequests();
     return Container(
         color: AppColors.light1,
         child: Column(
@@ -50,7 +51,7 @@ class _RequestsTabState extends State<RequestsTab> {
                     children: [
                       vSpacer(1),
                       ListView.builder(
-                        itemCount: 5,
+                        itemCount: state.garbageRequests.length,
                         physics: const BouncingScrollPhysics(),
                         shrinkWrap: true,
                         itemBuilder: (context, index) => RequestCard(

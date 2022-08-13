@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../data/models/app_user.dart';
+import '../../../data/models/login_res.dart';
 import '../../../data/shared/shared_auth.dart';
 import '../../../presentation/router/app_router.dart';
 
@@ -13,8 +14,9 @@ class LoginCubit extends Cubit<LoginState> {
   Future login({required String email, required String password}) async {
     try {
       emit(LoginLoading());
-      AppUser appUser =
+      LoginRes loginRes =
           await AppRouter.httpServices.login(email: email, password: password);
+      AppUser appUser = await AppRouter.httpServices.getUser(id: loginRes.id);
       SharedAuth.addUser(uid: appUser.id, type: appUser.type);
       emit(LoginSucceed());
     } catch (e) {

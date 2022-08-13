@@ -1,72 +1,71 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
-
 class GarbageRequest {
-  final String id;
-  final bool isHome;
-  final double lat;
-  final double lng;
-  final int timestamp;
-  final List<String> contains;
-  final int weight;
-  final int collectedTime;
+  final int id;
+  final String user;
+  final int mobileNo;
+  final String garbageType;
+  final String location;
+  final double longitude;
+  final double latitude;
+  final String status;
   GarbageRequest({
     required this.id,
-    required this.isHome,
-    required this.lat,
-    required this.lng,
-    required this.timestamp,
-    required this.contains,
-    required this.weight,
-    required this.collectedTime,
+    required this.user,
+    required this.mobileNo,
+    required this.garbageType,
+    required this.location,
+    required this.longitude,
+    required this.latitude,
+    required this.status,
   });
 
   GarbageRequest copyWith({
-    String? id,
-    bool? isHome,
-    double? lat,
-    double? lng,
-    int? timestamp,
-    List<String>? contains,
-    int? weight,
-    int? collectedTime,
+    int? id,
+    String? user,
+    int? mobileNo,
+    String? garbageType,
+    String? location,
+    double? longitude,
+    double? latitude,
+    String? status,
   }) {
     return GarbageRequest(
       id: id ?? this.id,
-      isHome: isHome ?? this.isHome,
-      lat: lat ?? this.lat,
-      lng: lng ?? this.lng,
-      timestamp: timestamp ?? this.timestamp,
-      contains: contains ?? this.contains,
-      weight: weight ?? this.weight,
-      collectedTime: collectedTime ?? this.collectedTime,
+      user: user ?? this.user,
+      mobileNo: mobileNo ?? this.mobileNo,
+      garbageType: garbageType ?? this.garbageType,
+      location: location ?? this.location,
+      longitude: longitude ?? this.longitude,
+      latitude: latitude ?? this.latitude,
+      status: status ?? this.status,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'isHome': isHome,
-      'lat': lat,
-      'lng': lng,
-      'timestamp': timestamp,
-      'contains': contains,
-      'weight': weight,
-      'collectedTime': collectedTime,
+      'user': user,
+      'mobile_no': mobileNo,
+      'garbage_type': garbageType,
+      'location': location,
+      'longitude': longitude,
+      'latitude': latitude,
+      'status': status,
     };
   }
 
   factory GarbageRequest.fromMap(Map<String, dynamic> map) {
     return GarbageRequest(
-      id: map['id'] as String,
-      isHome: map['isHome'] as bool,
-      lat: map['lat'] as double,
-      lng: map['lng'] as double,
-      timestamp: map['timestamp'] as int,
-      contains: List<String>.from((map['contains'] as List<String>)),
-      weight: map['weight'] as int,
-      collectedTime: map['collectedTime'] as int,
+      id: map['id'] as int,
+      user: map['user'] as String,
+      mobileNo: map['mobile_no'] as int,
+      garbageType: map['garbage_type'] as String,
+      location: map['location'] as String,
+      longitude: map['longitude'] as double,
+      latitude: map['latitude'] as double,
+      status: map['status'] as String,
     );
   }
 
@@ -77,7 +76,7 @@ class GarbageRequest {
 
   @override
   String toString() {
-    return 'GarbageRequest(id: $id, isHome: $isHome, lat: $lat, lng: $lng, timestamp: $timestamp, contains: $contains, weight: $weight, collectedTime: $collectedTime)';
+    return 'GarbageRequest(id: $id, user: $user, mobileNo: $mobileNo, garbageType: $garbageType, location: $location, longitude: $longitude, latitude: $latitude, status: $status)';
   }
 
   @override
@@ -85,24 +84,24 @@ class GarbageRequest {
     if (identical(this, other)) return true;
 
     return other.id == id &&
-        other.isHome == isHome &&
-        other.lat == lat &&
-        other.lng == lng &&
-        other.timestamp == timestamp &&
-        listEquals(other.contains, contains) &&
-        other.weight == weight &&
-        other.collectedTime == collectedTime;
+        other.user == user &&
+        other.mobileNo == mobileNo &&
+        other.garbageType == garbageType &&
+        other.location == location &&
+        other.longitude == longitude &&
+        other.latitude == latitude &&
+        other.status == status;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-        isHome.hashCode ^
-        lat.hashCode ^
-        lng.hashCode ^
-        timestamp.hashCode ^
-        contains.hashCode ^
-        weight.hashCode ^
-        collectedTime.hashCode;
+        user.hashCode ^
+        mobileNo.hashCode ^
+        garbageType.hashCode ^
+        location.hashCode ^
+        longitude.hashCode ^
+        latitude.hashCode ^
+        status.hashCode;
   }
 }

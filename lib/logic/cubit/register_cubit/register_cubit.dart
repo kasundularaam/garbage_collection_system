@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:garbage_collection_system/data/models/app_user.dart';
-import 'package:garbage_collection_system/data/models/register_req.dart';
 
+import '../../../data/models/app_user.dart';
+import '../../../data/models/register_req.dart';
 import '../../../data/shared/shared_auth.dart';
 import '../../../presentation/router/app_router.dart';
 

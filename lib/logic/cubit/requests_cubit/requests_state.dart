@@ -12,19 +12,6 @@ class RequestsLoaded extends RequestsState {
   RequestsLoaded({
     required this.garbageRequests,
   });
-
-  @override
-  bool operator ==(covariant RequestsLoaded other) {
-    if (identical(this, other)) return true;
-
-    return listEquals(other.garbageRequests, garbageRequests);
-  }
-
-  @override
-  int get hashCode => garbageRequests.hashCode;
-
-  @override
-  String toString() => 'RequestsLoaded(garbageRequests: $garbageRequests)';
 }
 
 class RequestsFailed extends RequestsState {
@@ -32,17 +19,4 @@ class RequestsFailed extends RequestsState {
   RequestsFailed({
     required this.errorMsg,
   });
-
-  @override
-  bool operator ==(covariant RequestsFailed other) {
-    if (identical(this, other)) return true;
-
-    return other.errorMsg == errorMsg;
-  }
-
-  @override
-  int get hashCode => errorMsg.hashCode;
-
-  @override
-  String toString() => 'RequestsFailed(errorMsg: $errorMsg)';
 }

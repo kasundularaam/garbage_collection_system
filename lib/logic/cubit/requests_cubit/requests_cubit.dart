@@ -13,7 +13,6 @@ class RequestsCubit extends Cubit<RequestsState> {
   Future loadRequests() async {
     try {
       emit(RequestsLoading());
-      Future.delayed(const Duration(seconds: 2));
       final int uid = await SharedAuth.getUid();
       final List<GarbageRequest> garbageRequests =
           await AppRouter.httpServices.getGarbageRequests(uid: uid);

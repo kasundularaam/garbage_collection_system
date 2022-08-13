@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 
 import '../../core/configs/configs.dart';
@@ -19,18 +22,10 @@ class HttpServices {
 
   List<GarbageRequest> garbageRequests = [];
 
-  Future<AppUser> getUser({required int uid}) async {
+  Future<AppUser> getUser({required int id}) async {
     try {
-      // Response response = await dio.get("$url/auth/user/");
-      return AppUser(
-          id: 5,
-          username: "saman.k",
-          mobileNo: 773612590,
-          email: "rushanthasindu10@gmail.com",
-          address: "B 34/1, Yataththawala, Imbulgasdeniya",
-          password: "rushan",
-          nic: "199716900992",
-          type: "USER");
+      Response response = await dio.get(DataProvider.user(id));
+      return AppUser.fromJson(response.toString());
     } catch (e) {
       throw e.toString();
     }
@@ -40,28 +35,20 @@ class HttpServices {
     try {
       Response response =
           await dio.post(DataProvider.register, data: registerReq.toMap());
-      return response.data as AppUser;
+      return AppUser.fromJson(response.toString());
     } catch (e) {
       throw e.toString();
     }
   }
 
-  Future<AppUser> login(
+  Future<LoginRes> login(
       {required String email, required String password}) async {
     try {
       Response response = await dio.post(DataProvider.login,
           data: {'email': email, 'password': password});
       final LoginRes loginRes = LoginRes.fromMap(response.data);
       if (loginRes.status == "SUCCESS") {
-        return AppUser(
-            id: 5,
-            username: "rushanthasindu10@gmail.com",
-            mobileNo: 773612590,
-            email: email,
-            address: "B 34/1, Yataththawala, Imbulgasdeniya",
-            password: password,
-            nic: "199716900992",
-            type: "USER");
+        return loginRes;
       } else {
         throw "An error occurred";
       }
@@ -83,9 +70,14 @@ class HttpServices {
 
   Future<List<GarbageRequest>> getGarbageRequests({required int uid}) async {
     try {
-      Response response = await dio.post(DataProvider.users);
-      return garbageRequests;
+      Response response = await dio.get(DataProvider.requests);
+      List<dynamic> resData = response.data;
+      List<GarbageRequest> requests =
+          resData.map((map) => GarbageRequest.fromMap(map)).toList();
+      return requests;
     } catch (e) {
+      log(e.toString());
+
       throw e.toString();
     }
   }

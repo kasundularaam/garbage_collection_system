@@ -37,6 +37,7 @@ class SignOutView extends StatelessWidget {
             ),
           ),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               textD("Username: ", 16),
               vSpacer(2),
@@ -47,6 +48,7 @@ class SignOutView extends StatelessWidget {
           ),
           vSpacer(2),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               textD("Email: ", 16),
               vSpacer(2),
@@ -55,8 +57,13 @@ class SignOutView extends StatelessWidget {
               ),
             ],
           ),
-          vSpacer(2),
+          vSpacer(1),
+          const Divider(
+            color: AppColors.dark1,
+          ),
+          vSpacer(1),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                 child: textD("remove account from this device: ", 14),

@@ -11,4 +11,10 @@ class AppColors {
   static const Color light1 = Color(0xFFF2F2F2);
   static const Color light3 = Color(0xFFE5E5E5);
   static const Color light4 = Color(0xFFD9D9D9);
+
+  static const Color collected = Color(0xFF058C3D);
+  static const Color pending = Color(0xFFD29D2B);
+
+  static Color collectedBg = const Color(0xFF058C3D).withOpacity(0.2);
+  static Color pendingBg = const Color(0xFFD29D2B).withOpacity(0.2);
 }
