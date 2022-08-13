@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:location/location.dart';
 
+import '../../../data/http/http_services.dart';
 import '../../../data/location/location_services.dart';
 import '../../../data/models/app_user.dart';
 import '../../../data/shared/shared_auth.dart';
-import '../../../presentation/router/app_router.dart';
 
 part 'home_garbage_state.dart';
 
@@ -17,7 +17,8 @@ class HomeGarbageCubit extends Cubit<HomeGarbageState> {
     try {
       emit(HomeGarbageLoading());
       final int id = await SharedAuth.getUid();
-      final AppUser appUser = await AppRouter.httpServices.getUser(id: id);
+      HttpServices httpServices = HttpServices();
+      final AppUser appUser = await httpServices.getUser(id: id);
       final LocationData location = await LocationServices.locationData;
       emit(HomeGarbageLoaded(
           contents: ["Plastic", "Paper"],

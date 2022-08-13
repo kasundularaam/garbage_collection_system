@@ -1,12 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:garbage_collection_system/data/models/garbage_request.dart';
-import 'package:garbage_collection_system/presentation/router/app_router.dart';
+
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
 import '../../../core/constants/strings.dart';
 import '../../../core/utils/app_utils.dart';
+import '../../../data/http/http_services.dart';
 import '../../../data/location/location_services.dart';
+import '../../../data/models/garbage_request.dart';
 
 part 'garbage_map_state.dart';
 
@@ -24,9 +25,9 @@ class GarbageMapCubit extends Cubit<GarbageMapState> {
           latLng: LatLng(userLocation.latitude!, userLocation.longitude!),
           info: "");
       markers.add(user);
-
+      HttpServices httpServices = HttpServices();
       final List<GarbageRequest> requests =
-          await AppRouter.httpServices.getNewGarbageRequests();
+          await httpServices.getNewGarbageRequests();
 
       GarbageRequest nearest = nearestRequest(
           requests, userLocation.latitude!, userLocation.longitude!);

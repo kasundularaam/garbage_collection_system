@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/exceptions/route_exception.dart';
-import '../../data/http/http_services.dart';
 import '../../data/models/app_user.dart';
 import '../../logic/cubit/home_garbage_cubit/home_garbage_cubit.dart';
 import '../../logic/cubit/landing_cubit/landing_cubit.dart';
@@ -29,8 +28,6 @@ class AppRouter {
   static const String roadGarbagePage = '/roadGarbagePage';
 
   const AppRouter._();
-
-  static HttpServices httpServices = HttpServices();
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {

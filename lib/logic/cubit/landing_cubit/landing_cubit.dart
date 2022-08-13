@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../data/http/http_services.dart';
 import '../../../data/models/app_user.dart';
 import '../../../data/shared/shared_auth.dart';
-import '../../../presentation/router/app_router.dart';
 
 part 'landing_state.dart';
 
@@ -18,7 +18,8 @@ class LandingCubit extends Cubit<LandingState> {
       if (isUserIn) {
         final int uid = await SharedAuth.getUid();
         final bool isDriver = await SharedAuth.isDriver();
-        AppUser appUser = await AppRouter.httpServices.getUser(id: uid);
+        HttpServices httpServices = HttpServices();
+        AppUser appUser = await httpServices.getUser(id: uid);
         if (isDriver) {
           emit(LandingToDriver(appUser: appUser));
         } else {
