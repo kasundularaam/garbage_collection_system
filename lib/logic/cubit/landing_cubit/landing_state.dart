@@ -12,19 +12,6 @@ class LandingToUser extends LandingState {
   LandingToUser({
     required this.appUser,
   });
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is LandingToUser && other.appUser == appUser;
-  }
-
-  @override
-  int get hashCode => appUser.hashCode;
-
-  @override
-  String toString() => 'LandingToHome(appUser: $appUser)';
 }
 
 class LandingToDriver extends LandingState {
@@ -32,19 +19,6 @@ class LandingToDriver extends LandingState {
   LandingToDriver({
     required this.appUser,
   });
-
-  @override
-  bool operator ==(covariant LandingToDriver other) {
-    if (identical(this, other)) return true;
-
-    return other.appUser == appUser;
-  }
-
-  @override
-  int get hashCode => appUser.hashCode;
-
-  @override
-  String toString() => 'LandingToDriver(appUser: $appUser)';
 }
 
 class LandingToAuth extends LandingState {}
@@ -54,17 +28,4 @@ class LandingFailed extends LandingState {
   LandingFailed({
     required this.errorMsg,
   });
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is LandingFailed && other.errorMsg == errorMsg;
-  }
-
-  @override
-  int get hashCode => errorMsg.hashCode;
-
-  @override
-  String toString() => 'LandingFailed(errorMsg: $errorMsg)';
 }

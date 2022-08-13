@@ -25,17 +25,4 @@ class HomeGarbageFailed extends HomeGarbageState {
   HomeGarbageFailed({
     required this.errorMsg,
   });
-
-  @override
-  bool operator ==(covariant HomeGarbageFailed other) {
-    if (identical(this, other)) return true;
-
-    return other.errorMsg == errorMsg;
-  }
-
-  @override
-  int get hashCode => errorMsg.hashCode;
-
-  @override
-  String toString() => 'HomeGarbageFailed(errorMsg: $errorMsg)';
 }

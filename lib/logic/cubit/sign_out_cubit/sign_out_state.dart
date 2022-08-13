@@ -13,17 +13,4 @@ class SignOutFailed extends SignOutState {
   SignOutFailed({
     required this.errorMsg,
   });
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is SignOutFailed && other.errorMsg == errorMsg;
-  }
-
-  @override
-  int get hashCode => errorMsg.hashCode;
-
-  @override
-  String toString() => 'SignOutFailed(errorMsg: $errorMsg)';
 }

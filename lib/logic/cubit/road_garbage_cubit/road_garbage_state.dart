@@ -22,7 +22,4 @@ class RoadGarbageFailed extends RoadGarbageState {
   RoadGarbageFailed({
     required this.errorMsg,
   });
-
-  @override
-  String toString() => 'RoadGarbageFailed(errorMsg: $errorMsg)';
 }

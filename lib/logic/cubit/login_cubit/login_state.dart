@@ -14,17 +14,4 @@ class LoginFailed extends LoginState {
   LoginFailed({
     required this.errorMsg,
   });
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is LoginFailed && other.errorMsg == errorMsg;
-  }
-
-  @override
-  int get hashCode => errorMsg.hashCode;
-
-  @override
-  String toString() => 'LoginFailed(errorMsg: $errorMsg)';
 }

@@ -22,17 +22,4 @@ class TruckMapFailed extends TruckMapState {
   TruckMapFailed({
     required this.errorMsg,
   });
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is TruckMapFailed && other.errorMsg == errorMsg;
-  }
-
-  @override
-  int get hashCode => errorMsg.hashCode;
-
-  @override
-  String toString() => 'TruckMapFailed(errorMsg: $errorMsg)';
 }

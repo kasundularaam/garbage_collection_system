@@ -11,9 +11,6 @@ class GetImageLoaded extends GetImageState {
   GetImageLoaded({
     required this.image,
   });
-
-  @override
-  String toString() => 'GetImageLoaded(image: $image)';
 }
 
 class GetImageFailed extends GetImageState {
@@ -21,17 +18,4 @@ class GetImageFailed extends GetImageState {
   GetImageFailed({
     required this.errorMsg,
   });
-
-  @override
-  bool operator ==(covariant GetImageFailed other) {
-    if (identical(this, other)) return true;
-
-    return other.errorMsg == errorMsg;
-  }
-
-  @override
-  int get hashCode => errorMsg.hashCode;
-
-  @override
-  String toString() => 'GetImageFailed(errorMsg: $errorMsg)';
 }
