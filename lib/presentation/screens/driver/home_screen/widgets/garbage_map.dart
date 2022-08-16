@@ -2,13 +2,13 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:garbage_collection_system/data/models/garbage_request.dart';
-import 'package:garbage_collection_system/logic/cubit/garbage_map_cubit/garbage_map_cubit.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../../../../core/components/components.dart';
 import '../../../../../core/themes/app_colors.dart';
+import '../../../../../data/models/garbage_request.dart';
+import '../../../../../logic/cubit/garbage_map_cubit/garbage_map_cubit.dart';
 
 class GarbageMap extends StatefulWidget {
   const GarbageMap({Key? key}) : super(key: key);

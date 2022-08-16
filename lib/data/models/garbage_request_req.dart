@@ -41,8 +41,8 @@ class GarbageRequestReq {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'user': user,
-      'mobileNo': mobileNo,
-      'garbageType': garbageType,
+      'mobile_no': mobileNo,
+      'garbage_type': garbageType,
       'location': location,
       'longitude': longitude,
       'latitude': latitude,
@@ -53,8 +53,8 @@ class GarbageRequestReq {
   factory GarbageRequestReq.fromMap(Map<String, dynamic> map) {
     return GarbageRequestReq(
       user: map['user'] as String,
-      mobileNo: map['mobileNo'] as int,
-      garbageType: map['garbageType'] as String,
+      mobileNo: map['mobile_no'] as int,
+      garbageType: map['garbage_type'] as String,
       location: map['location'] as String,
       longitude: map['longitude'] as double,
       latitude: map['latitude'] as double,

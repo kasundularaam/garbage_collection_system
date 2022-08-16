@@ -27,7 +27,7 @@ class _RequestButtonState extends State<RequestButton> {
           showSnackBar(context, state.errorMsg);
         }
         if (state is SendRequestSent) {
-          navPop(context);
+          showSnackBar(context, "Request Sent!");
         }
       },
       builder: (context, state) {

@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:garbage_collection_system/logic/cubit/garbage_map_cubit/garbage_map_cubit.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../core/components/components.dart';
 import '../../../../core/constants/strings.dart';
 import '../../../../core/themes/app_colors.dart';
 import '../../../../data/models/app_user.dart';
+import '../../../../logic/cubit/garbage_map_cubit/garbage_map_cubit.dart';
 import '../../../../logic/cubit/sign_out_cubit/sign_out_cubit.dart';
-import '../../../../logic/cubit/truck_map_cubit/truck_map_cubit.dart';
 import '../../auth/widgets/sign_out_view.dart';
 import 'widgets/garbage_map.dart';
 

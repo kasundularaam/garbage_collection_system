@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 
 import '../../core/configs/configs.dart';
@@ -60,13 +58,10 @@ class HttpServices {
   Future<GarbageRequest> createGarbageRequest(
       {required GarbageRequestReq garbageRequestReq}) async {
     try {
-      log(garbageRequestReq.toString());
       Response response = await dio.post(DataProvider.requests,
-          data: garbageRequestReq.toMap());
-      log(response.toString());
+          data: garbageRequestReq.toJson());
       return GarbageRequest.fromMap(response.data);
     } catch (e) {
-      log(e.toString());
       throw e.toString();
     }
   }
@@ -78,7 +73,7 @@ class HttpServices {
       List<dynamic> resData = response.data;
       List<GarbageRequest> requests =
           resData.map((map) => GarbageRequest.fromMap(map)).toList();
-      return requests;
+      return requests.reversed.toList();
     } catch (e) {
       throw e.toString();
     }

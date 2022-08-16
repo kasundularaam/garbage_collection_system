@@ -9,14 +9,19 @@ showSnackBar(BuildContext context, String message) {
   ScaffoldMessenger.of(context).showSnackBar(snackBar);
 }
 
-Widget page(Widget body) => AnnotatedRegion<SystemUiOverlayStyle>(
+Widget page(
+  Widget body,
+) =>
+    AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(
         statusBarColor: AppColors.primaryColor,
         statusBarIconBrightness: Brightness.light,
       ),
       child: Scaffold(
         backgroundColor: AppColors.light1,
-        body: SafeArea(child: body),
+        body: SafeArea(
+          child: body,
+        ),
       ),
     );
 
