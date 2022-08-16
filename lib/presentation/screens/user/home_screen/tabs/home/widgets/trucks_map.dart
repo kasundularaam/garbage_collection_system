@@ -27,6 +27,13 @@ class _TrucksMapState extends State<TrucksMap> {
     target: LatLng(6.9271, 79.8612),
     zoom: 15,
   );
+
+  @override
+  void dispose() {
+    BlocProvider.of<TruckMapCubit>(context).dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     BlocProvider.of<TruckMapCubit>(context).loadMap();

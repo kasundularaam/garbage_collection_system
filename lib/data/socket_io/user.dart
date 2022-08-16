@@ -5,7 +5,7 @@ import '../../core/configs/configs.dart';
 import '../models/truck_location.dart';
 
 class UserSocket {
-  io.Socket socket = io.io(socketAddress, <String, dynamic>{
+  io.Socket socket = io.io(socketUrl, <String, dynamic>{
     "transports": ["websocket"],
     "autoConnect": false
   });

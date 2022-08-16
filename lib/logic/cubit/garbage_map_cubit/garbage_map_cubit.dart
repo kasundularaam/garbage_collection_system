@@ -21,15 +21,12 @@ part 'garbage_map_state.dart';
 class GarbageMapCubit extends Cubit<GarbageMapState> {
   GarbageMapCubit() : super(GarbageMapInitial());
 
-  DriverSocket? driverSocket;
-
-  StreamController<TruckLocation> streamController =
-      StreamController<TruckLocation>();
+  DriverSocket? _driverSocket;
 
   Future loadMap({required AppUser appUser}) async {
     try {
       emit(GarbageMapLoading());
-      driverSocket = DriverSocket();
+
       Set<Marker> markers = {};
 
       HttpServices httpServices = HttpServices();
@@ -49,34 +46,22 @@ class GarbageMapCubit extends Cubit<GarbageMapState> {
 
       markers.add(request);
 
-      Stream<LocationData> locationStream = LocationServices.locationStream;
+      _driverSocket = DriverSocket(appUser: appUser);
+      Stream<TruckLocation> locationStream = _driverSocket!.sendData();
 
       locationStream.listen((location) async {
         Marker user = await getMarker(
             markerId: "truck",
             icon: Strings.truck,
-            latLng: LatLng(location.latitude!, location.longitude!),
+            latLng: LatLng(location.lat, location.lng),
             info: "");
         markers.add(user);
-
-        if (driverSocket != null) {
-          streamController.sink.add(
-            TruckLocation(
-              id: appUser.id,
-              name: appUser.username,
-              lat: location.latitude!,
-              lng: location.longitude!,
-              mobileNum: appUser.mobileNo,
-            ),
-          );
-          driverSocket!.sendData(dataStream: streamController.stream);
-        }
 
         PolylinePoints polylinePoints = PolylinePoints();
         String googleAPiKey = "AIzaSyArOcw3CWHD7pO800bfj3hF3Qpap5j8A2Q";
         Map<PolylineId, Polyline> polylines = {};
 
-        LatLng startLocation = LatLng(location.latitude!, location.longitude!);
+        LatLng startLocation = LatLng(location.lat, location.lng);
         LatLng endLocation = LatLng(nearest.latitude, nearest.longitude);
 
         List<LatLng> polylineCoordinates = [];
@@ -115,7 +100,12 @@ class GarbageMapCubit extends Cubit<GarbageMapState> {
         );
       });
     } catch (e) {
+      dispose();
       emit(GarbageMapFailed(errorMsg: e.toString()));
     }
+  }
+
+  dispose() {
+    _driverSocket!.dispose();
   }
 }

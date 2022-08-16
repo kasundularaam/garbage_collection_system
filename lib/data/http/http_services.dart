@@ -13,7 +13,7 @@ class HttpServices {
   Dio dio = Dio();
 
   HttpServices() {
-    dio.options.baseUrl = url;
+    dio.options.baseUrl = httpUrl;
     dio.options.connectTimeout = 5000;
     dio.options.receiveTimeout = 3000;
   }

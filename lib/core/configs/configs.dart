@@ -1,7 +1,9 @@
-const String server = "http://192.168.8.102";
+const String server = "http://192.168.8.101";
 
-const String port = "8000";
+const String httpPort = "8000";
 
-const String url = "$server:$port/api";
+const String httpUrl = "$server:$httpPort/api";
 
-const String socketAddress = "https://server";
+const String socketPort = "3000";
+
+const String socketUrl = "$server:$socketPort";

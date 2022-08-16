@@ -37,6 +37,13 @@ class _GarbageMapState extends State<GarbageMap> {
     target: LatLng(6.9271, 79.8612),
     zoom: 15,
   );
+
+  @override
+  void dispose() {
+    BlocProvider.of<GarbageMapCubit>(context).dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     BlocProvider.of<GarbageMapCubit>(context).loadMap(appUser: appUser);
@@ -78,7 +85,15 @@ class _GarbageMapState extends State<GarbageMap> {
                       vSpacer(2),
                       text("Type: ${req.garbageType}", 14, AppColors.dark3),
                       vSpacer(2),
-                      Center(child: buttonFilledP("Collected", () => {}))
+                      Center(
+                        child: buttonFilledP(
+                          "Collected",
+                          () =>
+                              BlocProvider.of<GarbageMapCubit>(context).loadMap(
+                            appUser: appUser,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
