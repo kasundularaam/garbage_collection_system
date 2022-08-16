@@ -1,46 +1,52 @@
 import 'dart:convert';
 
 class TruckLocation {
-  final String uid;
+  final int id;
   final String name;
   final double lat;
   final double lng;
+  final int mobileNum;
   TruckLocation({
-    required this.uid,
+    required this.id,
     required this.name,
     required this.lat,
     required this.lng,
+    required this.mobileNum,
   });
 
   TruckLocation copyWith({
-    String? uid,
+    int? id,
     String? name,
     double? lat,
     double? lng,
+    int? mobileNum,
   }) {
     return TruckLocation(
-      uid: uid ?? this.uid,
+      id: id ?? this.id,
       name: name ?? this.name,
       lat: lat ?? this.lat,
       lng: lng ?? this.lng,
+      mobileNum: mobileNum ?? this.mobileNum,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'uid': uid,
+      'id': id,
       'name': name,
       'lat': lat,
       'lng': lng,
+      'mobileNum': mobileNum,
     };
   }
 
   factory TruckLocation.fromMap(Map<String, dynamic> map) {
     return TruckLocation(
-      uid: map['uid'] as String,
+      id: map['id'] as int,
       name: map['name'] as String,
       lat: map['lat'] as double,
       lng: map['lng'] as double,
+      mobileNum: map['mobileNum'] as int,
     );
   }
 
@@ -51,22 +57,26 @@ class TruckLocation {
 
   @override
   String toString() {
-    return 'TruckLocation(uid: $uid, name: $name, lat: $lat, lng: $lng)';
+    return 'TruckLocation(id: $id, name: $name, lat: $lat, lng: $lng, mobileNum: $mobileNum)';
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(covariant TruckLocation other) {
     if (identical(this, other)) return true;
 
-    return other is TruckLocation &&
-        other.uid == uid &&
+    return other.id == id &&
         other.name == name &&
         other.lat == lat &&
-        other.lng == lng;
+        other.lng == lng &&
+        other.mobileNum == mobileNum;
   }
 
   @override
   int get hashCode {
-    return uid.hashCode ^ name.hashCode ^ lat.hashCode ^ lng.hashCode;
+    return id.hashCode ^
+        name.hashCode ^
+        lat.hashCode ^
+        lng.hashCode ^
+        mobileNum.hashCode;
   }
 }

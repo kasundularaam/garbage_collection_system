@@ -1,26 +1,29 @@
 import 'dart:async';
+
 import 'package:socket_io_client/socket_io_client.dart' as io;
 
 import '../../core/configs/configs.dart';
+import '../models/truck_location.dart';
 
-class SocketGet {
+class DriverSocket {
   io.Socket socket = io.io(socketAddress, <String, dynamic>{
     "transports": ["websocket"],
     "autoConnect": false
   });
 
-  final StreamController<String> socketResponse = StreamController<String>();
-
-  Stream<String> getData() async* {
+  sendData({required Stream<TruckLocation> dataStream}) async* {
     socket.connect();
-    socket.on('event', (data) {
-      socketResponse.sink.add(data as String);
-    });
-    yield* socketResponse.stream;
+    dataStream.listen(
+      (TruckLocation data) {
+        socket.emit(
+          "truck",
+          data,
+        );
+      },
+    );
   }
 
   void dispose() {
     socket.dispose();
-    socketResponse.close();
   }
 }

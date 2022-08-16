@@ -72,7 +72,9 @@ class _DriverHomePageState extends State<DriverHomePage> {
             Expanded(
               child: BlocProvider(
                 create: (context) => GarbageMapCubit(),
-                child: const GarbageMap(),
+                child: GarbageMap(
+                  appUser: appUser,
+                ),
               ),
             ),
           ],

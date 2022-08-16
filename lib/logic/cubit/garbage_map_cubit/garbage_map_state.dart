@@ -8,12 +8,14 @@ class GarbageMapLoading extends GarbageMapState {}
 
 class GarbageMapLoaded extends GarbageMapState {
   final Set<Marker> markers;
-  final LatLng userLocation;
+  final LatLng truckLocation;
   final GarbageRequest request;
+  Map<PolylineId, Polyline> polylines;
   GarbageMapLoaded({
     required this.markers,
-    required this.userLocation,
+    required this.truckLocation,
     required this.request,
+    required this.polylines,
   });
 }
 

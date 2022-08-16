@@ -7,20 +7,27 @@ import 'package:sizer/sizer.dart';
 
 import '../../../../../../../core/components/components.dart';
 import '../../../../../core/themes/app_colors.dart';
+import '../../../../../data/models/app_user.dart';
 import '../../../../../data/models/garbage_request.dart';
 import '../../../../../logic/cubit/garbage_map_cubit/garbage_map_cubit.dart';
 
 class GarbageMap extends StatefulWidget {
-  const GarbageMap({Key? key}) : super(key: key);
+  final AppUser appUser;
+  const GarbageMap({
+    Key? key,
+    required this.appUser,
+  }) : super(key: key);
 
   @override
   State<GarbageMap> createState() => _GarbageMapState();
 }
 
 class _GarbageMapState extends State<GarbageMap> {
+  AppUser get appUser => widget.appUser;
+
   final Completer<GoogleMapController> _controller = Completer();
 
-  Future<void> _userLocation({required LatLng latLng}) async {
+  Future<void> _truckLocation({required LatLng latLng}) async {
     CameraPosition camPos = CameraPosition(target: latLng, zoom: 15);
     final GoogleMapController controller = await _controller.future;
     controller.animateCamera(CameraUpdate.newCameraPosition(camPos));
@@ -32,7 +39,7 @@ class _GarbageMapState extends State<GarbageMap> {
   );
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<GarbageMapCubit>(context).loadMap();
+    BlocProvider.of<GarbageMapCubit>(context).loadMap(appUser: appUser);
 
     return BlocConsumer<GarbageMapCubit, GarbageMapState>(
       listener: (context, state) {
@@ -40,9 +47,9 @@ class _GarbageMapState extends State<GarbageMap> {
           showSnackBar(context, state.errorMsg);
         }
         if (state is GarbageMapLoaded) {
-          _userLocation(
+          _truckLocation(
               latLng: LatLng(
-                  state.userLocation.latitude, state.userLocation.longitude));
+                  state.truckLocation.latitude, state.truckLocation.longitude));
         }
       },
       builder: (context, state) {
@@ -58,6 +65,7 @@ class _GarbageMapState extends State<GarbageMap> {
                     _controller.complete(controller);
                   },
                   markers: state.markers,
+                  polylines: Set<Polyline>.of(state.polylines.values),
                 ),
               ),
               Card(
