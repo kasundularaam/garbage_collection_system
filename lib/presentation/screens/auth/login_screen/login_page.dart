@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -45,16 +46,16 @@ class _LoginPageState extends State<LoginPage> {
             vSpacer(5),
             Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10.w),
-                child: textP("Log In", 22, bold: true)),
+                child: textP("login".tr(), 22, bold: true)),
             vSpacer(3),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 5.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  inputEmail(emailCtrl, label: "Email"),
+                  inputEmail(emailCtrl, label: "email".tr()),
                   vSpacer(3),
-                  inputPassword(passwordCtrl, label: "Password"),
+                  inputPassword(passwordCtrl, label: "password".tr()),
                   vSpacer(3),
                   BlocConsumer<LoginCubit, LoginState>(
                     listener: (context, state) {
@@ -74,14 +75,14 @@ class _LoginPageState extends State<LoginPage> {
                               color: AppColors.primaryColor),
                         );
                       }
-                      return buttonFilledP("Log In", () => login());
+                      return buttonFilledP("login".tr(), () => login());
                     },
                   ),
                   vSpacer(5),
                   RichText(
                     text: TextSpan(children: [
                       TextSpan(
-                        text: "Don't have an account?",
+                        text: "no_account".tr(),
                         style: TextStyle(
                           color: AppColors.primaryColor,
                           fontSize: 12.sp,
@@ -89,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       TextSpan(
-                        text: " Register",
+                        text: "register".tr(),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () =>
                               navAndClear(context, AppRouter.registerPage),
