@@ -15,11 +15,9 @@ class TrucksMap extends StatefulWidget {
 }
 
 class _TrucksMapState extends State<TrucksMap> {
-  final Completer<GoogleMapController> _controller = Completer();
-
-  Future<void> _userLocation({required LatLng latLng}) async {
+  Future<void> _userLocation(
+      {required LatLng latLng, required GoogleMapController controller}) async {
     CameraPosition camPos = CameraPosition(target: latLng, zoom: 15);
-    final GoogleMapController controller = await _controller.future;
     controller.animateCamera(CameraUpdate.newCameraPosition(camPos));
   }
 
@@ -29,23 +27,12 @@ class _TrucksMapState extends State<TrucksMap> {
   );
 
   @override
-  void dispose() {
-    BlocProvider.of<TruckMapCubit>(context).dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     BlocProvider.of<TruckMapCubit>(context).loadMap();
     return BlocConsumer<TruckMapCubit, TruckMapState>(
       listener: (context, state) {
         if (state is TruckMapFailed) {
           showSnackBar(context, state.errorMsg);
-        }
-        if (state is TruckMapLoaded) {
-          _userLocation(
-              latLng: LatLng(
-                  state.userLocation.latitude, state.userLocation.longitude));
         }
       },
       builder: (context, state) {
@@ -54,7 +41,7 @@ class _TrucksMapState extends State<TrucksMap> {
             mapType: MapType.normal,
             initialCameraPosition: colombo,
             onMapCreated: (GoogleMapController controller) {
-              _controller.complete(controller);
+              _userLocation(latLng: state.userLocation, controller: controller);
             },
             markers: state.markers,
           );
@@ -62,12 +49,9 @@ class _TrucksMapState extends State<TrucksMap> {
         if (state is TruckMapLoading) {
           return Center(child: viewSpinner());
         }
-        return GoogleMap(
+        return const GoogleMap(
           mapType: MapType.normal,
           initialCameraPosition: colombo,
-          onMapCreated: (GoogleMapController controller) {
-            _controller.complete(controller);
-          },
         );
       },
     );

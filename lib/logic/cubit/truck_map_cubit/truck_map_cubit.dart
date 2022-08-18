@@ -29,27 +29,34 @@ class TruckMapCubit extends Cubit<TruckMapState> {
       markers.add(user);
 
       _userSocket = UserSocket();
+      Stream<TruckLocation> stream = _userSocket!.getTruckLocations();
 
-      if (_userSocket != null) {
-        Stream<TruckLocation> stream = _userSocket!.getTruckLocations();
-        stream.listen((truckLocation) async {
-          Marker user = await getMarker(
-              markerId: "truck_${truckLocation.id}",
-              icon: Strings.truck,
-              latLng: LatLng(truckLocation.lat, truckLocation.lng),
-              info: "");
-          markers.add(user);
-          emit(
-            TruckMapLoaded(
-              markers: markers,
-              userLocation: LatLng(
-                userLocation.latitude!,
-                userLocation.longitude!,
-              ),
+      stream.listen((truckLocation) async {
+        Marker truck = await getMarker(
+            markerId: "truck_${truckLocation.id}",
+            icon: Strings.truck,
+            latLng: LatLng(truckLocation.lat, truckLocation.lng),
+            info: "");
+        markers.add(truck);
+        emit(
+          TruckMapLoaded(
+            markers: markers,
+            userLocation: LatLng(
+              userLocation.latitude!,
+              userLocation.longitude!,
             ),
-          );
-        });
-      }
+          ),
+        );
+      });
+      emit(
+        TruckMapLoaded(
+          markers: markers,
+          userLocation: LatLng(
+            userLocation.latitude!,
+            userLocation.longitude!,
+          ),
+        ),
+      );
     } catch (e) {
       dispose();
       emit(
