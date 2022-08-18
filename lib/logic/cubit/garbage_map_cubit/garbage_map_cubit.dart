@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 
@@ -8,6 +7,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
 import '../../../core/constants/strings.dart';
+import '../../../core/themes/app_colors.dart';
 import '../../../core/utils/app_utils.dart';
 import '../../../data/http/http_services.dart';
 import '../../../data/location/location_services.dart';
@@ -49,6 +49,24 @@ class GarbageMapCubit extends Cubit<GarbageMapState> {
       _driverSocket = DriverSocket(appUser: appUser);
       Stream<TruckLocation> locationStream = _driverSocket!.sendData();
 
+      Map<PolylineId, Polyline> polylines = {};
+
+      LatLng startLocation =
+          LatLng(truckLocation.latitude!, truckLocation.longitude!);
+      LatLng endLocation = LatLng(nearest.latitude, nearest.longitude);
+      List<LatLng> polylineCoordinates =
+          await polylineCords(startLocation, endLocation);
+
+      PolylineId id = const PolylineId("poly");
+      Polyline polyline = Polyline(
+        polylineId: id,
+        color: AppColors.primaryColor,
+        points: polylineCoordinates,
+        width: 5,
+      );
+
+      polylines[id] = polyline;
+
       locationStream.listen((location) async {
         Marker user = await getMarker(
             markerId: "truck",
@@ -57,51 +75,46 @@ class GarbageMapCubit extends Cubit<GarbageMapState> {
             info: "");
         markers.add(user);
 
-        PolylinePoints polylinePoints = PolylinePoints();
-        String googleAPiKey = "AIzaSyArOcw3CWHD7pO800bfj3hF3Qpap5j8A2Q";
-        Map<PolylineId, Polyline> polylines = {};
-
-        LatLng startLocation = LatLng(location.lat, location.lng);
-        LatLng endLocation = LatLng(nearest.latitude, nearest.longitude);
-
-        List<LatLng> polylineCoordinates = [];
-
-        PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-          googleAPiKey,
-          PointLatLng(startLocation.latitude, startLocation.longitude),
-          PointLatLng(endLocation.latitude, endLocation.longitude),
-          travelMode: TravelMode.driving,
-        );
-
-        if (result.points.isNotEmpty) {
-          for (var point in result.points) {
-            polylineCoordinates.add(LatLng(point.latitude, point.longitude));
-          }
-        }
-
-        PolylineId id = const PolylineId("poly");
-        Polyline polyline = Polyline(
-          polylineId: id,
-          color: Colors.deepPurpleAccent,
-          points: polylineCoordinates,
-          width: 8,
-        );
-
-        polylines[id] = polyline;
-
         emit(
           GarbageMapLoaded(
-            request: nearest,
-            markers: markers,
-            truckLocation:
-                LatLng(truckLocation.latitude!, truckLocation.longitude!),
-            polylines: polylines,
-          ),
+              request: nearest,
+              markers: markers,
+              truckLocation:
+                  LatLng(truckLocation.latitude!, truckLocation.longitude!),
+              polylines: polylines),
         );
       });
     } catch (e) {
       dispose();
       emit(GarbageMapFailed(errorMsg: e.toString()));
+    }
+  }
+
+  Future<List<LatLng>> polylineCords(
+      LatLng startLocation, LatLng endLocation) async {
+    try {
+      List<LatLng> polylineCoordinates = [];
+
+      PolylinePoints polylinePoints = PolylinePoints();
+      String googleAPiKey = "AIzaSyBkNI6WUCCGPE4gd-w9ruJHin4KdKGrG7c";
+
+      PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+        googleAPiKey,
+        PointLatLng(startLocation.latitude, startLocation.longitude),
+        PointLatLng(endLocation.latitude, endLocation.longitude),
+        travelMode: TravelMode.driving,
+      );
+
+      if (result.points.isNotEmpty) {
+        for (var point in result.points) {
+          polylineCoordinates.add(LatLng(point.latitude, point.longitude));
+        }
+        return polylineCoordinates;
+      } else {
+        throw "unable to get coordinates";
+      }
+    } catch (e) {
+      throw e.toString();
     }
   }
 

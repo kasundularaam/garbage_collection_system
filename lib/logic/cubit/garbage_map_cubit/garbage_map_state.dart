@@ -1,6 +1,8 @@
 part of 'garbage_map_cubit.dart';
 
-abstract class GarbageMapState {}
+abstract class GarbageMapState {
+  get polylines => null;
+}
 
 class GarbageMapInitial extends GarbageMapState {}
 

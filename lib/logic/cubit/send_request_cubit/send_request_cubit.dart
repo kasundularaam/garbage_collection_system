@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../data/http/http_services.dart';
 import '../../../data/models/garbage_request.dart';
@@ -18,7 +16,6 @@ class SendRequestCubit extends Cubit<SendRequestState> {
           await httpServices.createGarbageRequest(garbageRequestReq: request);
       emit(SendRequestSent(garbageRequest: garbageRequest));
     } catch (e) {
-      log(e.toString());
       emit(SendRequestFailed(errorMsg: e.toString()));
     }
   }
