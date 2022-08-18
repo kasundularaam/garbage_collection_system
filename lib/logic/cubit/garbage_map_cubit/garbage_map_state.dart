@@ -21,6 +21,8 @@ class GarbageMapLoaded extends GarbageMapState {
   });
 }
 
+class GarbageMapAllCleaned extends GarbageMapState {}
+
 class GarbageMapFailed extends GarbageMapState {
   final String errorMsg;
   GarbageMapFailed({

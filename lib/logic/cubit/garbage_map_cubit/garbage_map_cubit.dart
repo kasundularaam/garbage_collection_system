@@ -33,57 +33,61 @@ class GarbageMapCubit extends Cubit<GarbageMapState> {
       final List<GarbageRequest> requests =
           await httpServices.getNewGarbageRequests();
 
-      LocationData truckLocation = await LocationServices.locationData;
+      if (requests.isEmpty) {
+        emit(GarbageMapAllCleaned());
+      } else {
+        LocationData truckLocation = await LocationServices.locationData;
 
-      GarbageRequest nearest = nearestRequest(
-          requests, truckLocation.latitude!, truckLocation.longitude!);
+        GarbageRequest nearest = nearestRequest(
+            requests, truckLocation.latitude!, truckLocation.longitude!);
 
-      Marker request = await getMarker(
-          markerId: "request",
-          icon: Strings.garbage,
-          latLng: LatLng(nearest.latitude, nearest.longitude),
-          info: "");
-
-      markers.add(request);
-
-      _driverSocket = DriverSocket(appUser: appUser);
-      Stream<TruckLocation> locationStream = _driverSocket!.sendData();
-
-      Map<PolylineId, Polyline> polylines = {};
-
-      LatLng startLocation =
-          LatLng(truckLocation.latitude!, truckLocation.longitude!);
-      LatLng endLocation = LatLng(nearest.latitude, nearest.longitude);
-      List<LatLng> polylineCoordinates =
-          await polylineCords(startLocation, endLocation);
-
-      PolylineId id = const PolylineId("poly");
-      Polyline polyline = Polyline(
-        polylineId: id,
-        color: AppColors.primaryColor,
-        points: polylineCoordinates,
-        width: 5,
-      );
-
-      polylines[id] = polyline;
-
-      locationStream.listen((location) async {
-        Marker user = await getMarker(
-            markerId: "truck",
-            icon: Strings.truck,
-            latLng: LatLng(location.lat, location.lng),
+        Marker request = await getMarker(
+            markerId: "request",
+            icon: Strings.garbage,
+            latLng: LatLng(nearest.latitude, nearest.longitude),
             info: "");
-        markers.add(user);
 
-        emit(
-          GarbageMapLoaded(
-              request: nearest,
-              markers: markers,
-              truckLocation:
-                  LatLng(truckLocation.latitude!, truckLocation.longitude!),
-              polylines: polylines),
+        markers.add(request);
+
+        _driverSocket = DriverSocket(appUser: appUser);
+        Stream<TruckLocation> locationStream = _driverSocket!.sendData();
+
+        Map<PolylineId, Polyline> polylines = {};
+
+        LatLng startLocation =
+            LatLng(truckLocation.latitude!, truckLocation.longitude!);
+        LatLng endLocation = LatLng(nearest.latitude, nearest.longitude);
+        List<LatLng> polylineCoordinates =
+            await polylineCords(startLocation, endLocation);
+
+        PolylineId id = const PolylineId("poly");
+        Polyline polyline = Polyline(
+          polylineId: id,
+          color: AppColors.primaryColor,
+          points: polylineCoordinates,
+          width: 5,
         );
-      });
+
+        polylines[id] = polyline;
+
+        locationStream.listen((location) async {
+          Marker user = await getMarker(
+              markerId: "truck",
+              icon: Strings.truck,
+              latLng: LatLng(location.lat, location.lng),
+              info: "");
+          markers.add(user);
+
+          emit(
+            GarbageMapLoaded(
+                request: nearest,
+                markers: markers,
+                truckLocation:
+                    LatLng(truckLocation.latitude!, truckLocation.longitude!),
+                polylines: polylines),
+          );
+        });
+      }
     } catch (e) {
       dispose();
       emit(GarbageMapFailed(errorMsg: e.toString()));

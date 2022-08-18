@@ -6,6 +6,7 @@ import '../../../../core/components/components.dart';
 import '../../../../core/constants/strings.dart';
 import '../../../../core/themes/app_colors.dart';
 import '../../../../data/models/app_user.dart';
+import '../../../../logic/cubit/garbage_collected_cubit/garbage_collected_cubit.dart';
 import '../../../../logic/cubit/garbage_map_cubit/garbage_map_cubit.dart';
 import '../../../../logic/cubit/sign_out_cubit/sign_out_cubit.dart';
 import '../../auth/widgets/sign_out_view.dart';
@@ -70,8 +71,15 @@ class _DriverHomePageState extends State<DriverHomePage> {
               ),
             ),
             Expanded(
-              child: BlocProvider(
-                create: (context) => GarbageMapCubit(),
+              child: MultiBlocProvider(
+                providers: [
+                  BlocProvider(
+                    create: (context) => GarbageMapCubit(),
+                  ),
+                  BlocProvider(
+                    create: (context) => GarbageCollectedCubit(),
+                  )
+                ],
                 child: GarbageMap(
                   appUser: appUser,
                 ),

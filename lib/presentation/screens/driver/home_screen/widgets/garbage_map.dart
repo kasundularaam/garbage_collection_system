@@ -10,6 +10,7 @@ import '../../../../../core/constants/strings.dart';
 import '../../../../../core/themes/app_colors.dart';
 import '../../../../../data/models/app_user.dart';
 import '../../../../../data/models/garbage_request.dart';
+import '../../../../../logic/cubit/garbage_collected_cubit/garbage_collected_cubit.dart';
 import '../../../../../logic/cubit/garbage_map_cubit/garbage_map_cubit.dart';
 
 class GarbageMap extends StatefulWidget {
@@ -25,6 +26,7 @@ class GarbageMap extends StatefulWidget {
 
 class _GarbageMapState extends State<GarbageMap> {
   AppUser get appUser => widget.appUser;
+  GarbageRequest? req;
 
   Future<void> _truckLocation(
       {required LatLng latLng, required GoogleMapController controller}) async {
@@ -36,6 +38,12 @@ class _GarbageMapState extends State<GarbageMap> {
     target: LatLng(6.9271, 79.8612),
     zoom: 15,
   );
+
+  update() {
+    GarbageRequest request = req!.copyWith(status: "COLLECTED");
+    BlocProvider.of<GarbageCollectedCubit>(context)
+        .updateRequest(request: request);
+  }
 
   @override
   void initState() {
@@ -59,7 +67,7 @@ class _GarbageMapState extends State<GarbageMap> {
       },
       builder: (context, state) {
         if (state is GarbageMapLoaded) {
-          GarbageRequest req = state.request;
+          req = state.request;
 
           return Container(
             color: AppColors.primaryColor,
@@ -97,11 +105,11 @@ class _GarbageMapState extends State<GarbageMap> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    textP("Garbage on ${req.location}", 16,
+                                    textP("Garbage on ${req!.location}", 16,
                                         bold: true),
                                     vSpacer(1),
-                                    text("Garbage Type: ${req.garbageType}", 14,
-                                        AppColors.dark3),
+                                    text("Garbage Type: ${req!.garbageType}",
+                                        14, AppColors.dark3),
                                   ],
                                 ),
                               ),
@@ -117,12 +125,26 @@ class _GarbageMapState extends State<GarbageMap> {
                               Expanded(
                                   child: textD("Mark garbage collected", 12)),
                               hSpacer(5.w),
-                              buttonFilledP(
-                                "Collected",
-                                () => BlocProvider.of<GarbageMapCubit>(context)
-                                    .loadMap(
-                                  appUser: appUser,
-                                ),
+                              BlocConsumer<GarbageCollectedCubit,
+                                  GarbageCollectedState>(
+                                listener: (context, state) {
+                                  if (state is GarbageCollectedFailed) {
+                                    showSnackBar(context, state.errorMsg);
+                                  }
+                                  if (state is GarbageCollectedUpdated) {
+                                    BlocProvider.of<GarbageMapCubit>(context)
+                                        .loadMap(appUser: appUser);
+                                  }
+                                },
+                                builder: (context, state) {
+                                  if (state is GarbageCollectedUpdating) {
+                                    return viewSpinner();
+                                  }
+                                  return buttonFilledP(
+                                    "Collected",
+                                    () => update(),
+                                  );
+                                },
                               ),
                             ],
                           ),
@@ -133,6 +155,31 @@ class _GarbageMapState extends State<GarbageMap> {
                 ),
               ],
             ),
+          );
+        }
+        if (state is GarbageMapAllCleaned) {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                Strings.done,
+                width: 100.w,
+                fit: BoxFit.fitWidth,
+              ),
+              vSpacer(3),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  textD("All Cleaned!", 20, bold: true),
+                  hSpacer(3),
+                  Icon(
+                    Icons.check_circle_rounded,
+                    color: AppColors.collected,
+                    size: 25.sp,
+                  )
+                ],
+              ),
+            ],
           );
         }
         if (state is GarbageMapLoading) {

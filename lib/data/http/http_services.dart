@@ -59,7 +59,18 @@ class HttpServices {
       {required GarbageRequestReq garbageRequestReq}) async {
     try {
       Response response = await dio.post(DataProvider.requests,
-          data: garbageRequestReq.toJson());
+          data: garbageRequestReq.toMap());
+      return GarbageRequest.fromMap(response.data);
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
+  Future<GarbageRequest> updateGarbageRequest(
+      {required GarbageRequest request}) async {
+    try {
+      Response response = await dio.put(DataProvider.requestsWithId(request.id),
+          data: request.toMap());
       return GarbageRequest.fromMap(response.data);
     } catch (e) {
       throw e.toString();
