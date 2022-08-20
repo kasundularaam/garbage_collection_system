@@ -16,7 +16,7 @@ class UserSocket {
   Stream<TruckLocation> getTruckLocations() async* {
     socket.connect();
     socket.on('user', (data) {
-      TruckLocation location = TruckLocation.fromJson(data);
+      TruckLocation location = TruckLocation.fromMap(data);
       streamController.sink.add(location);
     });
     yield* streamController.stream;

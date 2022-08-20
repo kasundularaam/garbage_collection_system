@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -6,7 +8,6 @@ import 'package:location/location.dart';
 import '../../../core/constants/strings.dart';
 import '../../../core/utils/app_utils.dart';
 import '../../../data/location/location_services.dart';
-import '../../../data/models/truck_location.dart';
 import '../../../data/socket_io/user.dart';
 
 part 'truck_map_state.dart';
@@ -14,7 +15,7 @@ part 'truck_map_state.dart';
 class TruckMapCubit extends Cubit<TruckMapState> {
   TruckMapCubit() : super(TruckMapInitial());
 
-  UserSocket? _userSocket;
+  final UserSocket _userSocket = UserSocket();
 
   Future loadMap() async {
     try {
@@ -28,10 +29,7 @@ class TruckMapCubit extends Cubit<TruckMapState> {
           info: "");
       markers.add(user);
 
-      _userSocket = UserSocket();
-      Stream<TruckLocation> stream = _userSocket!.getTruckLocations();
-
-      stream.listen((truckLocation) async {
+      _userSocket.getTruckLocations().listen((truckLocation) async {
         Marker truck = await getMarker(
             markerId: "truck_${truckLocation.id}",
             icon: Strings.truck,
@@ -68,6 +66,6 @@ class TruckMapCubit extends Cubit<TruckMapState> {
   }
 
   dispose() {
-    _userSocket!.dispose();
+    _userSocket.dispose();
   }
 }

@@ -18,7 +18,7 @@ class RequestCard extends StatefulWidget {
 
 class _RequestCardState extends State<RequestCard> {
   GarbageRequest get garbageRequest => widget.garbageRequest;
-  bool get collected => garbageRequest.status == "DONE";
+  bool get collected => garbageRequest.status == "COLLECTED";
   @override
   Widget build(BuildContext context) {
     return Card(
