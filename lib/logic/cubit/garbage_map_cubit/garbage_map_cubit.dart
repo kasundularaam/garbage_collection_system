@@ -100,7 +100,7 @@ class GarbageMapCubit extends Cubit<GarbageMapState> {
       List<LatLng> polylineCoordinates = [];
 
       PolylinePoints polylinePoints = PolylinePoints();
-      String googleAPiKey = "AIzaSyBkNI6WUCCGPE4gd-w9ruJHin4KdKGrG7c";
+      String googleAPiKey = "AIzaSyC2juTDRi7wjau4qkfjPWJeEevTqTTWPt8";
 
       PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
         googleAPiKey,
