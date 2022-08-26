@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -105,11 +106,19 @@ class _GarbageMapState extends State<GarbageMap> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    textP("Garbage on ${req!.location}", 16,
+                                    textP(
+                                        "garbage_location".tr(namedArgs: {
+                                          "location": req!.location.tr()
+                                        }),
+                                        16,
                                         bold: true),
                                     vSpacer(1),
-                                    text("Garbage Type: ${req!.garbageType}",
-                                        14, AppColors.dark3),
+                                    text(
+                                        "garbage_type".tr(namedArgs: {
+                                          "type": req!.garbageType
+                                        }),
+                                        14,
+                                        AppColors.dark3),
                                   ],
                                 ),
                               ),
@@ -122,8 +131,7 @@ class _GarbageMapState extends State<GarbageMap> {
                           vSpacer(1),
                           Row(
                             children: [
-                              Expanded(
-                                  child: textD("Mark garbage collected", 12)),
+                              Expanded(child: textD("mark_collected".tr(), 12)),
                               hSpacer(5.w),
                               BlocConsumer<GarbageCollectedCubit,
                                   GarbageCollectedState>(
@@ -141,7 +149,7 @@ class _GarbageMapState extends State<GarbageMap> {
                                     return viewSpinner();
                                   }
                                   return buttonFilledP(
-                                    "Collected",
+                                    "collected".tr(),
                                     () => update(),
                                   );
                                 },
@@ -170,7 +178,7 @@ class _GarbageMapState extends State<GarbageMap> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  textD("All Cleaned!", 20, bold: true),
+                  textD("cleaned".tr(), 20, bold: true),
                   hSpacer(3),
                   Icon(
                     Icons.check_circle_rounded,

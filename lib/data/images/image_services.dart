@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
@@ -20,10 +21,10 @@ class ImageServices {
         File newImage = await File(image.path).copy(newPath);
         return newImage;
       } else {
-        throw "No image captured";
+        throw "image_error".tr();
       }
     } catch (e) {
-      throw e.toString();
+      throw "error".tr();
     }
   }
 
@@ -36,10 +37,10 @@ class ImageServices {
       if (xImage != null) {
         return File(xImage.path);
       } else {
-        throw "No image captured";
+        throw "image_error".tr();
       }
     } catch (e) {
-      throw e.toString();
+      throw "error".tr();
     }
   }
 
@@ -52,10 +53,10 @@ class ImageServices {
       if (xImage != null) {
         return File(xImage.path);
       } else {
-        throw "No image selected";
+        throw "image_error".tr();
       }
     } catch (e) {
-      throw e.toString();
+      throw "error".tr();
     }
   }
 }

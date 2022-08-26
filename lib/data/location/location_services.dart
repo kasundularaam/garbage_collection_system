@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:location/location.dart';
 
 class LocationServices {
@@ -11,7 +12,7 @@ class LocationServices {
     if (!serviceEnabled) {
       serviceEnabled = await location.requestService();
       if (!serviceEnabled) {
-        return Future.error('Location services are disabled.');
+        return Future.error('location_off'.tr());
       }
     }
     return true;
@@ -22,7 +23,7 @@ class LocationServices {
     if (permissionGranted == PermissionStatus.denied) {
       permissionGranted = await location.requestPermission();
       if (permissionGranted != PermissionStatus.granted) {
-        return Future.error('Location permissions are denied');
+        return Future.error('location_permission_error'.tr());
       }
     }
     return true;
@@ -37,7 +38,7 @@ class LocationServices {
       }
       return false;
     } catch (e) {
-      throw e.toString();
+      throw "error".tr();
     }
   }
 }

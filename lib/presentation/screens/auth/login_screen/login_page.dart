@@ -90,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       TextSpan(
-                        text: "register".tr(),
+                        text: "register2".tr(),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () =>
                               navAndClear(context, AppRouter.registerPage),

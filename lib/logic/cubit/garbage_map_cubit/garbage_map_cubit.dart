@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 
@@ -115,10 +116,10 @@ class GarbageMapCubit extends Cubit<GarbageMapState> {
         }
         return polylineCoordinates;
       } else {
-        throw "unable to get coordinates";
+        throw "route_error".tr();
       }
     } catch (e) {
-      throw e.toString();
+      throw "route_error".tr();
     }
   }
 

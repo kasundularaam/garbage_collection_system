@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
@@ -26,7 +27,7 @@ class _RoadGarbagePageState extends State<RoadGarbagePage> {
   Widget build(BuildContext context) {
     return page(Column(
       children: [
-        simpleAppBar("Garbage On Road", context),
+        simpleAppBar("road_garbage".tr(), context),
         BlocProvider(
           create: (context) => GetImageCubit(),
           child: CaptureCard(

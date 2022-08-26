@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
@@ -27,7 +27,7 @@ class _WeightCardState extends State<WeightCard> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            textD("Weight (approximately)", 16, bold: true),
+            textD("weight_approximately".tr(), 16, bold: true),
             vSpacer(3),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

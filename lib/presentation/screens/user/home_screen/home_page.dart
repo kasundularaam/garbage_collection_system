@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/components/components.dart';
@@ -49,19 +50,19 @@ class _UserHomePageState extends State<UserHomePage> {
     return appScaffold(
       _widgetOptions.elementAt(_selectedIndex),
       BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(
+            icon: const Icon(
               Icons.home_rounded,
             ),
-            label: "Home",
+            label: "home".tr(),
             backgroundColor: AppColors.primaryColor,
           ),
           BottomNavigationBarItem(
-            icon: Icon(
+            icon: const Icon(
               Icons.list_rounded,
             ),
-            label: "Requests",
+            label: "requests".tr(),
             backgroundColor: AppColors.primaryColor,
           ),
         ],
@@ -76,7 +77,7 @@ class _UserHomePageState extends State<UserHomePage> {
       fab: _selectedIndex == 0
           ? FloatingActionButton.extended(
               onPressed: () => navPush(context, AppRouter.newRequestPage),
-              label: textL("Request", 14),
+              label: textL("request".tr(), 14),
               icon: const Icon(
                 Icons.add_rounded,
                 color: AppColors.light0,

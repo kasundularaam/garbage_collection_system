@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
@@ -28,7 +29,7 @@ class _HomeGarbagePageState extends State<HomeGarbagePage> {
     return page(
       Column(
         children: [
-          simpleAppBar("Garbage On My Home", context),
+          simpleAppBar("home_garbage".tr(), context),
           BlocProvider(
             create: (context) => GetImageCubit(),
             child: CaptureCard(
@@ -70,7 +71,7 @@ class _HomeGarbagePageState extends State<HomeGarbagePage> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              textD("Contains", 16, bold: true),
+                              textD("contains".tr(), 16, bold: true),
                               vSpacer(1),
                               Wrap(
                                 spacing: 2.w,
@@ -90,7 +91,7 @@ class _HomeGarbagePageState extends State<HomeGarbagePage> {
                         onChange: (weight) => {},
                       ),
                       vSpacer(2),
-                      textD("Inform the nearest garbage truck", 12),
+                      textD("inform_truck".tr(), 12),
                       vSpacer(1),
                       BlocProvider(
                         create: (context) => SendRequestCubit(),

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
@@ -71,10 +72,10 @@ class _CaptureCardState extends State<CaptureCard> {
             Row(
               children: [
                 Expanded(
-                  child: text("Capture garbage", 12, AppColors.dark3),
+                  child: text("capture_garbage".tr(), 12, AppColors.dark3),
                 ),
                 hSpacer(5),
-                buttonFilledP("Capture",
+                buttonFilledP("capture".tr(),
                     () => BlocProvider.of<GetImageCubit>(context).getImage())
               ],
             ),

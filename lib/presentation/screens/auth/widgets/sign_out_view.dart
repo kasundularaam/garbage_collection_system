@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
@@ -39,7 +40,7 @@ class SignOutView extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              textD("Username: ", 16),
+              textD("username2".tr(), 16),
               vSpacer(2),
               Expanded(
                 child: textD(appUser.username, 16),
@@ -50,10 +51,43 @@ class SignOutView extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              textD("Email: ", 16),
+              textD("email2".tr(), 16),
               vSpacer(2),
               Expanded(
                 child: textD(appUser.email, 16),
+              ),
+            ],
+          ),
+          vSpacer(2),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              textD("NIC2".tr(), 16),
+              vSpacer(2),
+              Expanded(
+                child: textD(appUser.nic, 16),
+              ),
+            ],
+          ),
+          vSpacer(2),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              textD("mobile2".tr(), 16),
+              vSpacer(2),
+              Expanded(
+                child: textD("${appUser.mobileNo}", 16),
+              ),
+            ],
+          ),
+          vSpacer(2),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              textD("address2".tr(), 16),
+              vSpacer(2),
+              Expanded(
+                child: textD(appUser.address, 16),
               ),
             ],
           ),
@@ -66,7 +100,7 @@ class SignOutView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
-                child: textD("remove account from this device: ", 14),
+                child: textD("remove_account".tr(), 14),
               ),
               hSpacer(2),
               BlocConsumer<SignOutCubit, SignOutState>(
@@ -80,7 +114,7 @@ class SignOutView extends StatelessWidget {
                 },
                 builder: (context, state) {
                   return buttonFilledP(
-                    "SIGN OUT",
+                    "sign_out".tr(),
                     () => BlocProvider.of<SignOutCubit>(context).signOut(),
                   );
                 },

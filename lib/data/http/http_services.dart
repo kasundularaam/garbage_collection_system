@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '../../core/configs/configs.dart';
 import '../data_providers/data_provider.dart';
@@ -25,7 +28,7 @@ class HttpServices {
       Response response = await dio.get(DataProvider.user(id));
       return AppUser.fromMap(response.data);
     } catch (e) {
-      throw e.toString();
+      throw "error".tr();
     }
   }
 
@@ -34,8 +37,10 @@ class HttpServices {
       Response response =
           await dio.post(DataProvider.register, data: registerReq.toMap());
       return AppUser.fromMap(response.data);
+    } on SocketException {
+      throw "network_error".tr();
     } catch (e) {
-      throw e.toString();
+      throw "error".tr();
     }
   }
 
@@ -48,10 +53,12 @@ class HttpServices {
       if (loginRes.status == "SUCCESS") {
         return loginRes;
       } else {
-        throw "An error occurred";
+        throw "login_error".tr();
       }
+    } on SocketException {
+      throw "network_error".tr();
     } catch (e) {
-      throw e.toString();
+      throw "error".tr();
     }
   }
 
@@ -61,8 +68,10 @@ class HttpServices {
       Response response = await dio.post(DataProvider.requests,
           data: garbageRequestReq.toMap());
       return GarbageRequest.fromMap(response.data);
+    } on SocketException {
+      throw "network_error".tr();
     } catch (e) {
-      throw e.toString();
+      throw "error".tr();
     }
   }
 
@@ -72,8 +81,10 @@ class HttpServices {
       Response response = await dio.put(DataProvider.requestsWithId(request.id),
           data: request.toMap());
       return GarbageRequest.fromMap(response.data);
+    } on SocketException {
+      throw "network_error".tr();
     } catch (e) {
-      throw e.toString();
+      throw "error".tr();
     }
   }
 
@@ -85,8 +96,10 @@ class HttpServices {
       List<GarbageRequest> requests =
           resData.map((map) => GarbageRequest.fromMap(map)).toList();
       return requests.reversed.toList();
+    } on SocketException {
+      throw "network_error".tr();
     } catch (e) {
-      throw e.toString();
+      throw "error".tr();
     }
   }
 
@@ -103,8 +116,10 @@ class HttpServices {
         }
       }
       return pendingRequests;
+    } on SocketException {
+      throw "network_error".tr();
     } catch (e) {
-      throw e.toString();
+      throw "error".tr();
     }
   }
 }

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
@@ -27,9 +28,17 @@ class _RequestCardState extends State<RequestCard> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            textP("Garbage on ${garbageRequest.location}", 16, bold: true),
+            textP(
+                "garbage_location"
+                    .tr(namedArgs: {"location": garbageRequest.location.tr()}),
+                16,
+                bold: true),
             vSpacer(2),
-            text("Type: ${garbageRequest.garbageType}", 14, AppColors.dark3),
+            text(
+                "garbage_type"
+                    .tr(namedArgs: {"type": garbageRequest.garbageType}),
+                14,
+                AppColors.dark3),
             vSpacer(2),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 1.5.h),
@@ -41,8 +50,13 @@ class _RequestCardState extends State<RequestCard> {
                 children: [
                   Expanded(
                     child: collected
-                        ? text("Collected", 14, bold: true, AppColors.collected)
-                        : text("Pending", 14, bold: true, AppColors.pending),
+                        ? text(
+                            "collected".tr(),
+                            14,
+                            bold: true,
+                            AppColors.collected)
+                        : text(
+                            "pending".tr(), 14, bold: true, AppColors.pending),
                   ),
                   collected
                       ? Icon(

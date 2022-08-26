@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -57,24 +58,24 @@ class _RegisterPageState extends State<RegisterPage> {
             vSpacer(5),
             Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10.w),
-                child: textP("Register", 22, bold: true)),
+                child: textP("register".tr(), 22, bold: true)),
             vSpacer(3),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 5.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  inputName(usernameCtrl, label: "Username"),
+                  inputName(usernameCtrl, label: "username".tr()),
                   vSpacer(3),
-                  inputEmail(emailCtrl, label: "Email"),
+                  inputEmail(emailCtrl, label: "email".tr()),
                   vSpacer(3),
-                  inputText(addressCtrl, label: "Address"),
+                  inputText(addressCtrl, label: "address".tr()),
                   vSpacer(3),
-                  inputPhone(mobileCtrl, label: "Mobile"),
+                  inputPhone(mobileCtrl, label: "mobile".tr()),
                   vSpacer(3),
-                  inputText(nicCtrl, label: "Nic"),
+                  inputText(nicCtrl, label: "NIC".tr()),
                   vSpacer(3),
-                  inputPassword(passwordCtrl, label: "Password"),
+                  inputPassword(passwordCtrl, label: "password".tr()),
                   vSpacer(3),
                   BlocConsumer<RegisterCubit, RegisterState>(
                     listener: (context, state) {
@@ -92,14 +93,14 @@ class _RegisterPageState extends State<RegisterPage> {
                               color: AppColors.primaryColor),
                         );
                       }
-                      return buttonFilledP("Register", () => register());
+                      return buttonFilledP("register".tr(), () => register());
                     },
                   ),
                   vSpacer(5),
                   RichText(
                     text: TextSpan(children: [
                       TextSpan(
-                        text: "Do you have an account?",
+                        text: "have_account".tr(),
                         style: TextStyle(
                           color: AppColors.primaryColor,
                           fontSize: 12.sp,
@@ -107,7 +108,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                       ),
                       TextSpan(
-                        text: " Log In",
+                        text: "login2".tr(),
                         recognizer: TapGestureRecognizer()
                           ..onTap =
                               () => navAndClear(context, AppRouter.loginPage),

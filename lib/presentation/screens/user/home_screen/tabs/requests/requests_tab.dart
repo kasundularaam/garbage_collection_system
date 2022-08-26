@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
@@ -27,7 +28,7 @@ class _RequestsTabState extends State<RequestsTab> {
               padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
               child: Row(
                 children: [
-                  Expanded(child: textL("Requests", 18, bold: true)),
+                  Expanded(child: textL("requests".tr(), 18, bold: true)),
                 ],
               ),
             ),

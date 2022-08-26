@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
@@ -18,7 +19,7 @@ class _NewRequestPageState extends State<NewRequestPage> {
   Widget build(BuildContext context) {
     return page(Column(
       children: [
-        simpleAppBar("New Request", context),
+        simpleAppBar("new_request".tr(), context),
         Expanded(
           child: ListView(
             physics: const BouncingScrollPhysics(),
@@ -40,8 +41,7 @@ class _NewRequestPageState extends State<NewRequestPage> {
                         ),
                       ),
                       vSpacer(2),
-                      textP("Garbage on my home", 16, bold: true),
-                      // textP("මගේ නිවසේ කසල", 16, bold: true),
+                      textP("home_garbage".tr(), 16, bold: true),
                       vSpacer(1),
                       const Divider(
                         color: AppColors.dark3,
@@ -50,17 +50,12 @@ class _NewRequestPageState extends State<NewRequestPage> {
                       Row(
                         children: [
                           Expanded(
-                            child: text(
-                                "Send request to collect garbage",
-                                12,
-                                // child: text("කසල එකතු කිරීම සදහා ඉල්ලීම් කරන්න", 12,
-
-                                AppColors.dark3),
+                            child:
+                                text("send_request".tr(), 12, AppColors.dark3),
                           ),
                           hSpacer(5),
-                          buttonFilledP("Request",
+                          buttonFilledP("request".tr(),
                               () => navPush(context, AppRouter.homeGarbagePage))
-                          // buttonFilledP("ඉල්ලීම් කරන්න", () => {})
                         ],
                       ),
                     ],
@@ -83,8 +78,7 @@ class _NewRequestPageState extends State<NewRequestPage> {
                         ),
                       ),
                       vSpacer(2),
-                      textP("Garbage on this location", 16, bold: true),
-                      // textP("මෙම ස්ථනයේ ඇති කසල", 16, bold: true),
+                      textP("road_garbage".tr(), 16, bold: true),
                       vSpacer(1),
                       const Divider(
                         color: AppColors.dark3,
@@ -93,16 +87,12 @@ class _NewRequestPageState extends State<NewRequestPage> {
                       Row(
                         children: [
                           Expanded(
-                            child: text(
-                                "Send request to collect garbage",
-                                12,
-                                // child: text("කසල එකතු කිරීම සදහා ඉල්ලීම් කරන්න", 12,
-                                AppColors.dark3),
+                            child:
+                                text("send_request".tr(), 12, AppColors.dark3),
                           ),
                           hSpacer(5),
-                          buttonFilledP("Request",
+                          buttonFilledP("request".tr(),
                               () => navPush(context, AppRouter.roadGarbagePage))
-                          // buttonFilledP("ඉල්ලීම් කරන්න", () => {})
                         ],
                       ),
                     ],
