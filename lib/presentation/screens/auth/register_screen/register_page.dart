@@ -23,6 +23,7 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController emailCtrl = TextEditingController();
   TextEditingController mobileCtrl = TextEditingController();
   TextEditingController passwordCtrl = TextEditingController();
+  TextEditingController confirmCtrl = TextEditingController();
   TextEditingController addressCtrl = TextEditingController();
   TextEditingController nicCtrl = TextEditingController();
 
@@ -30,12 +31,13 @@ class _RegisterPageState extends State<RegisterPage> {
     BlocProvider.of<RegisterCubit>(context).register(
         registerReq: RegisterReq(
             username: usernameCtrl.text,
-            mobileNo: int.parse(mobileCtrl.text),
+            mobileNo: mobileCtrl.text.isEmpty ? -1 : int.parse(mobileCtrl.text),
             email: emailCtrl.text,
             address: addressCtrl.text,
             password: passwordCtrl.text,
             nic: nicCtrl.text,
-            type: "USER"));
+            type: "USER"),
+        confirm: confirmCtrl.text);
   }
 
   @override
@@ -76,6 +78,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   inputText(nicCtrl, label: "NIC".tr()),
                   vSpacer(3),
                   inputPassword(passwordCtrl, label: "password".tr()),
+                  vSpacer(3),
+                  inputPassword(confirmCtrl, label: "confirm_password".tr()),
                   vSpacer(3),
                   BlocConsumer<RegisterCubit, RegisterState>(
                     listener: (context, state) {

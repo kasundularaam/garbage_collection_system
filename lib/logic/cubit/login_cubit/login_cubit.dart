@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:garbage_collection_system/core/validator/validators.dart';
 
 import '../../../data/http/http_services.dart';
 import '../../../data/models/app_user.dart';
@@ -14,6 +15,8 @@ class LoginCubit extends Cubit<LoginState> {
   Future login({required String email, required String password}) async {
     try {
       emit(LoginLoading());
+      emailValid(email);
+      passwordValid(password);
       HttpServices httpServices = HttpServices();
       LoginRes loginRes =
           await httpServices.login(email: email, password: password);
