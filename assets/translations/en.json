@@ -57,6 +57,8 @@
     "capture":"Capture",
     "request_sent":"Request Sent",
     "send_request2":"Send Request",
-    "weight_approximately":"Weight (approximately)"
+    "weight_approximately":"Weight (approximately)",
+    "user_guide":"User guide"
+
 
 }

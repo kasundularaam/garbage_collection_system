@@ -31,8 +31,12 @@ class SignOutView extends StatelessWidget {
               height: 30.w,
             ),
           ),
+          vSpacer(2),
+          textD(appUser.username, 16, bold: true),
+          vSpacer(1),
+          textD(appUser.email, 14),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 4.h),
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 2.h),
             child: const Divider(
               color: AppColors.dark1,
             ),
@@ -40,55 +44,53 @@ class SignOutView extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              textD("username2".tr(), 16),
-              vSpacer(2),
+              textD("NIC2".tr(), 14),
+              vSpacer(1),
               Expanded(
-                child: textD(appUser.username, 16),
+                child: textD(appUser.nic, 14),
               ),
             ],
           ),
-          vSpacer(2),
+          vSpacer(1),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              textD("email2".tr(), 16),
+              textD("mobile2".tr(), 14),
               vSpacer(2),
               Expanded(
-                child: textD(appUser.email, 16),
+                child: textD("${appUser.mobileNo}", 14),
               ),
             ],
           ),
-          vSpacer(2),
+          vSpacer(1),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              textD("NIC2".tr(), 16),
+              textD("address2".tr(), 14),
               vSpacer(2),
               Expanded(
-                child: textD(appUser.nic, 16),
+                child: textD(appUser.address, 14),
               ),
             ],
           ),
-          vSpacer(2),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              textD("mobile2".tr(), 16),
-              vSpacer(2),
-              Expanded(
-                child: textD("${appUser.mobileNo}", 16),
-              ),
-            ],
+          vSpacer(1),
+          const Divider(
+            color: AppColors.dark1,
           ),
-          vSpacer(2),
+          vSpacer(1),
+          textD("user_guide".tr(), 14, bold: true),
+          vSpacer(1),
           Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              textD("address2".tr(), 16),
-              vSpacer(2),
-              Expanded(
-                child: textD(appUser.address, 16),
+              buttonTextP(
+                "English",
+                () => navPush(context, AppRouter.guidPage, args: "english"),
               ),
+              buttonTextP(
+                "සිංහල",
+                () => navPush(context, AppRouter.guidPage, args: "sinhala"),
+              )
             ],
           ),
           vSpacer(1),

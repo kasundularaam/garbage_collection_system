@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:garbage_collection_system/presentation/screens/user_guid_screen/user_guid_page.dart';
 import '../../core/exceptions/route_exception.dart';
 import '../../data/models/app_user.dart';
 import '../../logic/cubit/home_garbage_cubit/home_garbage_cubit.dart';
@@ -26,6 +27,7 @@ class AppRouter {
   static const String newRequestPage = '/newRequestPage';
   static const String homeGarbagePage = '/homeGarbagePage';
   static const String roadGarbagePage = '/roadGarbagePage';
+  static const String guidPage = '/guidPage';
 
   const AppRouter._();
 
@@ -97,6 +99,11 @@ class AppRouter {
             ],
             child: const RoadGarbagePage(),
           ),
+        );
+      case guidPage:
+        final String name = settings.arguments as String;
+        return MaterialPageRoute(
+          builder: (_) => UserGuidPage(name: name),
         );
       default:
         throw const RouteException('Route not found!');
