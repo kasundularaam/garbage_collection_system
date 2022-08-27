@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,6 +11,7 @@ import '../../../../../data/models/app_user.dart';
 import '../../../../../data/models/garbage_request.dart';
 import '../../../../../logic/cubit/garbage_collected_cubit/garbage_collected_cubit.dart';
 import '../../../../../logic/cubit/garbage_map_cubit/garbage_map_cubit.dart';
+import 'map_loaded_view.dart';
 
 class GarbageMap extends StatefulWidget {
   final AppUser appUser;
@@ -29,12 +28,6 @@ class _GarbageMapState extends State<GarbageMap> {
   AppUser get appUser => widget.appUser;
   GarbageRequest? req;
 
-  Future<void> _truckLocation(
-      {required LatLng latLng, required GoogleMapController controller}) async {
-    CameraPosition camPos = CameraPosition(target: latLng, zoom: 15);
-    controller.animateCamera(CameraUpdate.newCameraPosition(camPos));
-  }
-
   static const CameraPosition colombo = CameraPosition(
     target: LatLng(6.9271, 79.8612),
     zoom: 15,
@@ -48,14 +41,8 @@ class _GarbageMapState extends State<GarbageMap> {
 
   @override
   void initState() {
-    BlocProvider.of<GarbageMapCubit>(context).loadMap(appUser: appUser);
+    BlocProvider.of<GarbageMapCubit>(context).loadMap();
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    BlocProvider.of<GarbageMapCubit>(context).dispose();
-    super.dispose();
   }
 
   @override
@@ -65,28 +52,20 @@ class _GarbageMapState extends State<GarbageMap> {
         if (state is GarbageMapFailed) {
           showSnackBar(context, state.errorMsg);
         }
+        if (state is GarbageMapLoaded) {
+          req = state.request;
+        }
       },
       builder: (context, state) {
         if (state is GarbageMapLoaded) {
-          req = state.request;
-
-          return Container(
-            color: AppColors.primaryColor,
-            child: Column(
-              children: [
-                Expanded(
-                  child: GoogleMap(
-                    mapType: MapType.normal,
-                    initialCameraPosition: colombo,
-                    onMapCreated: (GoogleMapController controller) {
-                      _truckLocation(
-                          latLng: state.truckLocation, controller: controller);
-                    },
-                    markers: state.markers,
-                    polylines: Set<Polyline>.of(state.polylines.values),
-                  ),
-                ),
-                Padding(
+          return Column(
+            children: [
+              Expanded(
+                child: MapLoadedView(state: state),
+              ),
+              Container(
+                color: AppColors.collected,
+                child: Padding(
                   padding: EdgeInsets.all(1.w),
                   child: Card(
                     color: AppColors.light0,
@@ -141,7 +120,7 @@ class _GarbageMapState extends State<GarbageMap> {
                                   }
                                   if (state is GarbageCollectedUpdated) {
                                     BlocProvider.of<GarbageMapCubit>(context)
-                                        .loadMap(appUser: appUser);
+                                        .loadMap();
                                   }
                                 },
                                 builder: (context, state) {
@@ -161,8 +140,8 @@ class _GarbageMapState extends State<GarbageMap> {
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           );
         }
         if (state is GarbageMapAllCleaned) {

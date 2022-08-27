@@ -1,30 +1,26 @@
 import 'dart:async';
+import 'package:garbage_collection_system/data/models/app_user.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
 
 import '../../core/configs/configs.dart';
 import '../location/location_services.dart';
-import '../models/app_user.dart';
 import '../models/truck_location.dart';
 
 class DriverSocket {
-  final AppUser appUser;
-  DriverSocket({
-    required this.appUser,
-  });
   io.Socket socket = io.io(socketUrl, <String, dynamic>{
     "transports": ["websocket"],
     "autoConnect": false
   });
 
   final StreamController<TruckLocation> socketResponse =
-      StreamController<TruckLocation>();
+      StreamController<TruckLocation>.broadcast();
 
   void addResponse({required TruckLocation truckLocation}) =>
       socketResponse.sink.add(truckLocation);
 
   Stream<TruckLocation> getResponse() => socketResponse.stream;
 
-  Stream<TruckLocation> sendData() async* {
+  Stream<TruckLocation> sendData({required AppUser appUser}) async* {
     socket.connect();
 
     LocationServices.locationStream.listen((location) {
@@ -47,6 +43,7 @@ class DriverSocket {
   }
 
   void dispose() {
+    socketResponse.close();
     socket.dispose();
   }
 }

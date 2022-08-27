@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
-
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
@@ -14,23 +13,21 @@ import '../../../data/http/http_services.dart';
 import '../../../data/location/location_services.dart';
 import '../../../data/models/app_user.dart';
 import '../../../data/models/garbage_request.dart';
-import '../../../data/models/truck_location.dart';
 import '../../../data/socket_io/driver.dart';
 
 part 'garbage_map_state.dart';
 
 class GarbageMapCubit extends Cubit<GarbageMapState> {
-  GarbageMapCubit() : super(GarbageMapInitial());
+  final AppUser appUser;
+  GarbageMapCubit({required this.appUser}) : super(GarbageMapInitial());
 
-  DriverSocket? _driverSocket;
+  final DriverSocket _driverSocket = DriverSocket();
 
-  Future loadMap({required AppUser appUser}) async {
+  Future loadMap() async {
     try {
       emit(GarbageMapLoading());
 
-      Set<Marker> markers = {};
-
-      HttpServices httpServices = HttpServices();
+      final HttpServices httpServices = HttpServices();
       final List<GarbageRequest> requests =
           await httpServices.getNewGarbageRequests();
 
@@ -42,6 +39,8 @@ class GarbageMapCubit extends Cubit<GarbageMapState> {
         GarbageRequest nearest = nearestRequest(
             requests, truckLocation.latitude!, truckLocation.longitude!);
 
+        Set<Marker> markers = {};
+
         Marker request = await getMarker(
             markerId: "request",
             icon: Strings.garbage,
@@ -49,9 +48,6 @@ class GarbageMapCubit extends Cubit<GarbageMapState> {
             info: "");
 
         markers.add(request);
-
-        _driverSocket = DriverSocket(appUser: appUser);
-        Stream<TruckLocation> locationStream = _driverSocket!.sendData();
 
         Map<PolylineId, Polyline> polylines = {};
 
@@ -71,13 +67,19 @@ class GarbageMapCubit extends Cubit<GarbageMapState> {
 
         polylines[id] = polyline;
 
-        locationStream.listen((location) async {
-          Marker user = await getMarker(
+        _driverSocket.sendData(appUser: appUser).listen((location) async {
+          Marker truck = await getMarker(
               markerId: "truck",
               icon: Strings.truck,
               latLng: LatLng(location.lat, location.lng),
               info: "");
-          markers.add(user);
+          markers.add(truck);
+          Set<Marker> updated = markers
+              .map((item) =>
+                  item.markerId == const MarkerId("truck") ? truck : item)
+              .toSet();
+          markers.clear();
+          markers.addAll(updated);
 
           emit(
             GarbageMapLoaded(
@@ -124,6 +126,6 @@ class GarbageMapCubit extends Cubit<GarbageMapState> {
   }
 
   dispose() {
-    _driverSocket!.dispose();
+    _driverSocket.dispose();
   }
 }

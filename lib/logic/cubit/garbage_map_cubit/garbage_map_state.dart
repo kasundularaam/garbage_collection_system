@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'garbage_map_cubit.dart';
 
 abstract class GarbageMapState {
@@ -12,7 +13,7 @@ class GarbageMapLoaded extends GarbageMapState {
   final Set<Marker> markers;
   final LatLng truckLocation;
   final GarbageRequest request;
-  Map<PolylineId, Polyline> polylines;
+  final Map<PolylineId, Polyline> polylines;
   GarbageMapLoaded({
     required this.markers,
     required this.truckLocation,

@@ -75,7 +75,7 @@ class _DriverHomePageState extends State<DriverHomePage> {
               child: MultiBlocProvider(
                 providers: [
                   BlocProvider(
-                    create: (context) => GarbageMapCubit(),
+                    create: (context) => GarbageMapCubit(appUser: appUser),
                   ),
                   BlocProvider(
                     create: (context) => GarbageCollectedCubit(),
