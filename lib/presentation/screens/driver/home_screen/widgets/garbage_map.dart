@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -49,6 +51,7 @@ class _GarbageMapState extends State<GarbageMap> {
   Widget build(BuildContext context) {
     return BlocConsumer<GarbageMapCubit, GarbageMapState>(
       listener: (context, state) {
+        log(state.toString());
         if (state is GarbageMapFailed) {
           showSnackBar(context, state.errorMsg);
         }
