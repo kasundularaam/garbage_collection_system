@@ -7,6 +7,8 @@ import '../../core/configs/configs.dart';
 import '../data_providers/data_provider.dart';
 import '../models/app_user.dart';
 
+import '../models/complain.dart';
+import '../models/complain_req.dart';
 import '../models/garbage_request.dart';
 import '../models/garbage_request_req.dart';
 import '../models/login_res.dart';
@@ -75,6 +77,18 @@ class HttpServices {
     }
   }
 
+  Future<Complain> createComplain({required ComplainReq complainReq}) async {
+    try {
+      Response response =
+          await dio.post(DataProvider.complains, data: complainReq.toMap());
+      return Complain.fromMap(response.data);
+    } on SocketException {
+      throw "network_error".tr();
+    } catch (e) {
+      throw "error".tr();
+    }
+  }
+
   Future<GarbageRequest> updateGarbageRequest(
       {required GarbageRequest request}) async {
     try {
@@ -116,6 +130,26 @@ class HttpServices {
         }
       }
       return pendingRequests;
+    } on SocketException {
+      throw "network_error".tr();
+    } catch (e) {
+      throw "error".tr();
+    }
+  }
+
+  Future<List<Complain>> getComplains({required String reqId}) async {
+    try {
+      Response response = await dio.get(DataProvider.complains);
+      List<dynamic> resData = response.data;
+      List<Complain> complains =
+          resData.map((map) => Complain.fromMap(map)).toList();
+      List<Complain> filtered = [];
+      for (var complain in complains) {
+        if (complain.reqId == reqId) {
+          filtered.add(complain);
+        }
+      }
+      return filtered;
     } on SocketException {
       throw "network_error".tr();
     } catch (e) {

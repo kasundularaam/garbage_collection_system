@@ -17,4 +17,5 @@ class AppColors {
 
   static Color collectedBg = const Color(0xFF058C3D).withOpacity(0.2);
   static Color pendingBg = const Color(0xFFD29D2B).withOpacity(0.2);
+  static Color complainBg = const Color(0xFFFF0000).withOpacity(0.2);
 }

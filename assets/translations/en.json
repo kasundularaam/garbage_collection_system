@@ -61,7 +61,16 @@
     "weight_approximately":"Weight (approximately)",
     "user_guide":"User guide",
     "refresh":"Refresh",
-    "app_language":"App Language"
+    "app_language":"App Language",
+    "complaint_empty":"Can't send empty complains",
+    "complaints":"Complains",
+    "complaint":"Complain",
+    "sending":"SENDING",
+    "send":"SEND"
+
+
+
+
 
 
 

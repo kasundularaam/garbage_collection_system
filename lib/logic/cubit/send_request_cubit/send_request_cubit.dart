@@ -11,8 +11,8 @@ class SendRequestCubit extends Cubit<SendRequestState> {
   Future sendRequest({required GarbageRequestReq request}) async {
     try {
       emit(SendRequestSending());
-      HttpServices httpServices = HttpServices();
-      GarbageRequest garbageRequest =
+      final HttpServices httpServices = HttpServices();
+      final GarbageRequest garbageRequest =
           await httpServices.createGarbageRequest(garbageRequestReq: request);
       emit(SendRequestSent(garbageRequest: garbageRequest));
     } catch (e) {

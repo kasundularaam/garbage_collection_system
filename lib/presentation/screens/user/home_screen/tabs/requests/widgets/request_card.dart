@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
@@ -5,21 +6,19 @@ import 'package:sizer/sizer.dart';
 import '../../../../../../../core/components/components.dart';
 import '../../../../../../../core/themes/app_colors.dart';
 import '../../../../../../../data/models/garbage_request.dart';
+import '../../../../../../router/app_router.dart';
 
-class RequestCard extends StatefulWidget {
-  final GarbageRequest garbageRequest;
+class RequestCard extends StatelessWidget {
+  final GarbageRequest request;
+  final String email;
   const RequestCard({
     Key? key,
-    required this.garbageRequest,
+    required this.request,
+    required this.email,
   }) : super(key: key);
 
-  @override
-  State<RequestCard> createState() => _RequestCardState();
-}
+  bool get collected => request.status == "COLLECTED";
 
-class _RequestCardState extends State<RequestCard> {
-  GarbageRequest get garbageRequest => widget.garbageRequest;
-  bool get collected => garbageRequest.status == "COLLECTED";
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -30,15 +29,12 @@ class _RequestCardState extends State<RequestCard> {
           children: [
             textP(
                 "garbage_location"
-                    .tr(namedArgs: {"location": garbageRequest.location.tr()}),
+                    .tr(namedArgs: {"location": request.location.tr()}),
                 16,
                 bold: true),
             vSpacer(2),
-            text(
-                "garbage_type"
-                    .tr(namedArgs: {"type": garbageRequest.garbageType}),
-                14,
-                AppColors.dark3),
+            text("garbage_type".tr(namedArgs: {"type": request.garbageType}),
+                14, AppColors.dark3),
             vSpacer(2),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 1.5.h),
@@ -71,6 +67,16 @@ class _RequestCardState extends State<RequestCard> {
                         )
                 ],
               ),
+            ),
+            Row(
+              children: [
+                Expanded(child: nothing),
+                buttonTextP(
+                  "complaints".tr(),
+                  () => navPush(context, AppRouter.complainsPage,
+                      args: {"reqId": "${request.id}", "email": email}),
+                ),
+              ],
             )
           ],
         ),

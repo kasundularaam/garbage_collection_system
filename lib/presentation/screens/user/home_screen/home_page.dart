@@ -24,11 +24,13 @@ class _UserHomePageState extends State<UserHomePage> {
   AppUser get appUser => widget.appUser;
   int _selectedIndex = 0;
   static HomeTab? homeTab;
+  static RequestsTab? requestsTab;
 
   @override
   void initState() {
     super.initState();
     homeTab = HomeTab(appUser: appUser);
+    requestsTab = RequestsTab(email: appUser.email);
   }
 
   void _onItemTapped(int index) {
@@ -41,7 +43,7 @@ class _UserHomePageState extends State<UserHomePage> {
     homeTab!,
     BlocProvider(
       create: (context) => RequestsCubit(),
-      child: const RequestsTab(),
+      child: requestsTab!,
     ),
   ];
 

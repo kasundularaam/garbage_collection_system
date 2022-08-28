@@ -4,8 +4,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../../../core/components/components.dart';
 import '../../../../../data/models/app_user.dart';
-import '../../../../../logic/cubit/cubit/garbage_route_cubit.dart';
 import '../../../../../logic/cubit/garbage_map_cubit/garbage_map_cubit.dart';
+import '../../../../../logic/cubit/garbage_route_cubit/garbage_route_cubit.dart';
 import 'garbage_map.dart';
 
 class MapSpace extends StatelessWidget {

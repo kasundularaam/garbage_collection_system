@@ -61,7 +61,12 @@
     "weight_approximately": "බර (ආසන්න වශයෙන්)",
     "user_guide":"පරිශීලක මාර්ගෝපදේශය",
     "refresh":"නැවුම් කරන්න",
-    "app_language":"යෙදුම් භාෂාව"
+    "app_language":"යෙදුම් භාෂාව",
+    "complaint_empty":"හිස් පැමිණිලි යැවිය නොහැක",
+    "complaints":"පැමිණිලි",
+    "complaint":"පැමිණිල්ල",
+    "sending":"යවමින්",
+    "send":"යවන්න"
 
 
 

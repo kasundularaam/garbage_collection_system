@@ -80,3 +80,11 @@ bool passwordsValid(String password, String confirm) {
   }
   return true;
 }
+
+bool complainValid(String complain) {
+  bool empty = complain.isEmpty;
+  if (empty) {
+    throw "complain_empty".tr();
+  }
+  return true;
+}
