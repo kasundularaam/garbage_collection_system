@@ -9,7 +9,7 @@ import '../../../../../../core/themes/app_colors.dart';
 import '../../../../../../data/models/app_user.dart';
 import '../../../../../../logic/cubit/sign_out_cubit/sign_out_cubit.dart';
 import '../../../../../../logic/cubit/truck_map_cubit/truck_map_cubit.dart';
-import '../../../../auth/widgets/sign_out_view.dart';
+import '../../../../auth/widgets/profile_view.dart';
 import 'widgets/trucks_map.dart';
 
 class HomeTab extends StatefulWidget {
@@ -51,7 +51,7 @@ class _HomeTabState extends State<HomeTab> {
                       builder: (sheetContext) {
                         return BlocProvider(
                             create: (context) => SignOutCubit(),
-                            child: SignOutView(
+                            child: ProfileView(
                               appUser: appUser,
                             ));
                       },

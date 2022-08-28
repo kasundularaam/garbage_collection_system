@@ -10,9 +10,9 @@ import '../../../../data/models/app_user.dart';
 import '../../../../logic/cubit/sign_out_cubit/sign_out_cubit.dart';
 import '../../../router/app_router.dart';
 
-class SignOutView extends StatelessWidget {
+class ProfileView extends StatelessWidget {
   final AppUser appUser;
-  const SignOutView({
+  const ProfileView({
     Key? key,
     required this.appUser,
   }) : super(key: key);
@@ -71,6 +71,26 @@ class SignOutView extends StatelessWidget {
               Expanded(
                 child: textD(appUser.address, 14),
               ),
+            ],
+          ),
+          vSpacer(1),
+          const Divider(
+            color: AppColors.dark1,
+          ),
+          vSpacer(1),
+          textD("app_language".tr(), 14, bold: true),
+          vSpacer(1),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              buttonTextP(
+                "English",
+                () => context.setLocale(const Locale('en')),
+              ),
+              buttonTextP(
+                "සිංහල",
+                () => context.setLocale(const Locale('si')),
+              )
             ],
           ),
           vSpacer(1),

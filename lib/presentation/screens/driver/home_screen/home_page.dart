@@ -12,7 +12,7 @@ import '../../../../logic/cubit/cubit/garbage_route_cubit.dart';
 import '../../../../logic/cubit/garbage_collected_cubit/garbage_collected_cubit.dart';
 import '../../../../logic/cubit/sign_out_cubit/sign_out_cubit.dart';
 import '../../../../logic/cubit/targets_cubit/targets_cubit.dart';
-import '../../auth/widgets/sign_out_view.dart';
+import '../../auth/widgets/profile_view.dart';
 import 'widgets/completed_view.dart';
 import 'widgets/detail_card.dart';
 import 'widgets/map_space.dart';
@@ -52,7 +52,7 @@ class DriverHomePage extends StatelessWidget {
                       builder: (sheetContext) {
                         return BlocProvider(
                             create: (context) => SignOutCubit(),
-                            child: SignOutView(
+                            child: ProfileView(
                               appUser: appUser,
                             ));
                       },
