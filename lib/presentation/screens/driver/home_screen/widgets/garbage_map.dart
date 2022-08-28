@@ -40,7 +40,7 @@ class GarbageMap extends StatelessWidget {
           return Center(child: viewSpinner());
         }
         if (state is GarbageMapLoaded) {
-          GoogleMap(
+          return GoogleMap(
             mapType: MapType.normal,
             initialCameraPosition: colombo,
             onMapCreated: (GoogleMapController controller) {

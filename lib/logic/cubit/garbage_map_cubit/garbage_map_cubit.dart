@@ -31,7 +31,7 @@ class GarbageMapCubit extends Cubit<GarbageMapState> {
 
       Marker targetMarker = await getMarker(
           markerId: "target",
-          icon: Strings.truck,
+          icon: Strings.garbage,
           latLng: LatLng(target.latitude, target.longitude),
           info: "");
 
@@ -54,6 +54,7 @@ class GarbageMapCubit extends Cubit<GarbageMapState> {
             .map((item) =>
                 item.markerId.value == "truck" ? truckTrackMarker : item)
             .toSet();
+        if (isClosed) return;
         emit(
           GarbageMapLoaded(
               markers: markers,
