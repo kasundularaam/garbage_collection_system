@@ -2,7 +2,9 @@ import 'dart:math';
 import 'dart:ui' as ui;
 import 'dart:typed_data';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../data/models/garbage_request.dart';
@@ -61,4 +63,32 @@ double calculateDistance(lat1, lon1, lat2, lon2) {
       cos((lat2 - lat1) * p) / 2 +
       cos(lat1 * p) * log(lat2 * p) * (1 - cos((lon2 - lon1) * p)) / 2;
   return 12742 * asin(sqrt(a));
+}
+
+Future<List<LatLng>> polylineCords(
+    LatLng startLocation, LatLng endLocation) async {
+  try {
+    List<LatLng> polylineCoordinates = [];
+
+    PolylinePoints polylinePoints = PolylinePoints();
+    String googleAPiKey = "AIzaSyC2juTDRi7wjau4qkfjPWJeEevTqTTWPt8";
+
+    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+      googleAPiKey,
+      PointLatLng(startLocation.latitude, startLocation.longitude),
+      PointLatLng(endLocation.latitude, endLocation.longitude),
+      travelMode: TravelMode.driving,
+    );
+
+    if (result.points.isNotEmpty) {
+      for (var point in result.points) {
+        polylineCoordinates.add(LatLng(point.latitude, point.longitude));
+      }
+      return polylineCoordinates;
+    } else {
+      throw "route_error".tr();
+    }
+  } catch (e) {
+    throw "route_error".tr();
+  }
 }

@@ -1,9 +1,9 @@
 import 'dart:async';
-import 'package:garbage_collection_system/data/models/app_user.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
 
 import '../../core/configs/configs.dart';
 import '../location/location_services.dart';
+import '../models/app_user.dart';
 import '../models/truck_location.dart';
 
 class DriverSocket {

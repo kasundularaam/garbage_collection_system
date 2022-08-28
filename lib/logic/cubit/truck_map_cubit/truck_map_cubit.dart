@@ -19,7 +19,7 @@ class TruckMapCubit extends Cubit<TruckMapState> {
     try {
       emit(TruckMapLoading());
       Set<Marker> markers = {};
-      LocationData userLocation = await LocationServices.locationData;
+      LocationData userLocation = await LocationServices.locationData();
       Marker user = await getMarker(
           markerId: "user",
           icon: Strings.user,

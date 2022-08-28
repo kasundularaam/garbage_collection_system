@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:garbage_collection_system/core/validator/validators.dart';
 
+import '../../../core/validator/validators.dart';
 import '../../../data/http/http_services.dart';
 import '../../../data/models/app_user.dart';
 import '../../../data/models/login_res.dart';

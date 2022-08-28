@@ -1,7 +1,9 @@
 part of 'garbage_map_cubit.dart';
 
-abstract class GarbageMapState {
-  get polylines => null;
+abstract class GarbageMapState extends Equatable {
+  const GarbageMapState();
+  @override
+  List<Object?> get props => throw UnimplementedError();
 }
 
 class GarbageMapInitial extends GarbageMapState {}
@@ -10,22 +12,22 @@ class GarbageMapLoading extends GarbageMapState {}
 
 class GarbageMapLoaded extends GarbageMapState {
   final Set<Marker> markers;
-  final LatLng truckLocation;
-  final GarbageRequest request;
-  final Map<PolylineId, Polyline> polylines;
-  GarbageMapLoaded({
+  final LatLng trackLocation;
+  const GarbageMapLoaded({
     required this.markers,
-    required this.truckLocation,
-    required this.request,
-    required this.polylines,
+    required this.trackLocation,
   });
-}
 
-class GarbageMapAllCleaned extends GarbageMapState {}
+  @override
+  List<Object?> get props => [markers, trackLocation];
+}
 
 class GarbageMapFailed extends GarbageMapState {
   final String errorMsg;
-  GarbageMapFailed({
+  const GarbageMapFailed({
     required this.errorMsg,
   });
+
+  @override
+  List<Object?> get props => [errorMsg];
 }

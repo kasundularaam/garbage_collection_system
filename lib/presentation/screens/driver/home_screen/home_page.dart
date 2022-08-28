@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,13 +8,16 @@ import '../../../../core/components/components.dart';
 import '../../../../core/constants/strings.dart';
 import '../../../../core/themes/app_colors.dart';
 import '../../../../data/models/app_user.dart';
+import '../../../../logic/cubit/cubit/garbage_route_cubit.dart';
 import '../../../../logic/cubit/garbage_collected_cubit/garbage_collected_cubit.dart';
-import '../../../../logic/cubit/garbage_map_cubit/garbage_map_cubit.dart';
 import '../../../../logic/cubit/sign_out_cubit/sign_out_cubit.dart';
+import '../../../../logic/cubit/targets_cubit/targets_cubit.dart';
 import '../../auth/widgets/sign_out_view.dart';
-import 'widgets/garbage_map.dart';
+import 'widgets/completed_view.dart';
+import 'widgets/detail_card.dart';
+import 'widgets/map_space.dart';
 
-class DriverHomePage extends StatefulWidget {
+class DriverHomePage extends StatelessWidget {
   final AppUser appUser;
   const DriverHomePage({
     Key? key,
@@ -21,14 +25,8 @@ class DriverHomePage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<DriverHomePage> createState() => _DriverHomePageState();
-}
-
-class _DriverHomePageState extends State<DriverHomePage> {
-  AppUser get appUser => widget.appUser;
-
-  @override
   Widget build(BuildContext context) {
+    BlocProvider.of<TargetsCubit>(context).loadTargets();
     return page(
       Container(
         color: AppColors.light1,
@@ -72,18 +70,43 @@ class _DriverHomePageState extends State<DriverHomePage> {
               ),
             ),
             Expanded(
-              child: MultiBlocProvider(
-                providers: [
-                  BlocProvider(
-                    create: (context) => GarbageMapCubit(appUser: appUser),
-                  ),
-                  BlocProvider(
-                    create: (context) => GarbageCollectedCubit(),
-                  )
-                ],
-                child: GarbageMap(
-                  appUser: appUser,
-                ),
+              child: BlocConsumer<TargetsCubit, TargetsState>(
+                listener: (context, state) {
+                  if (state is TargetsFailed) {
+                    showSnackBar(context, state.errorMsg);
+                  }
+                },
+                builder: (context, state) {
+                  if (state is TargetsLoading) {
+                    return Center(
+                      child: viewSpinner(),
+                    );
+                  }
+                  if (state is TargetsLoaded) {
+                    return Column(
+                      children: [
+                        Expanded(
+                          child: BlocProvider(
+                            create: (context) => GarbageRouteCubit(),
+                            child: MapSpace(
+                              appUser: appUser,
+                              startLocation: state.start,
+                              endLocation: state.end,
+                            ),
+                          ),
+                        ),
+                        BlocProvider(
+                          create: (context) => GarbageCollectedCubit(),
+                          child: DetailCard(request: state.target),
+                        )
+                      ],
+                    );
+                  }
+                  if (state is TargetsCompeted) {
+                    return const CompletedView();
+                  }
+                  return nothing;
+                },
               ),
             ),
           ],
