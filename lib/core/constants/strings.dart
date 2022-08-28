@@ -1,5 +1,5 @@
 class Strings {
-  static const appTitle = 'App Name';
+  static const appTitle = 'BIN EAZY';
 
   static const homeScreenTitle = 'Home Screen';
 
