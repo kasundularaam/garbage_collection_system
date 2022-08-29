@@ -11,7 +11,7 @@ class UserSocket {
   });
 
   final StreamController<TruckLocation> streamController =
-      StreamController<TruckLocation>();
+      StreamController<TruckLocation>.broadcast();
 
   Stream<TruckLocation> getTruckLocations() async* {
     socket.connect();

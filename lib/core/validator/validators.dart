@@ -84,7 +84,7 @@ bool passwordsValid(String password, String confirm) {
 bool complainValid(String complain) {
   bool empty = complain.isEmpty;
   if (empty) {
-    throw "complain_empty".tr();
+    throw "complaint_empty".tr();
   }
   return true;
 }

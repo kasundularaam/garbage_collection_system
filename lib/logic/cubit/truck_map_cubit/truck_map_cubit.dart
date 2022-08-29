@@ -27,6 +27,16 @@ class TruckMapCubit extends Cubit<TruckMapState> {
           info: "");
       markers.add(user);
 
+      emit(
+        TruckMapLoaded(
+          markers: markers,
+          userLocation: LatLng(
+            userLocation.latitude!,
+            userLocation.longitude!,
+          ),
+        ),
+      );
+
       _userSocket.getTruckLocations().listen((truckLocation) async {
         Marker truck = await getMarker(
             markerId: "truck_${truckLocation.id}",
@@ -34,6 +44,8 @@ class TruckMapCubit extends Cubit<TruckMapState> {
             latLng: LatLng(truckLocation.lat, truckLocation.lng),
             info: "");
         markers.add(truck);
+
+        if (isClosed) return;
         emit(
           TruckMapLoaded(
             markers: markers,
@@ -44,26 +56,12 @@ class TruckMapCubit extends Cubit<TruckMapState> {
           ),
         );
       });
-      emit(
-        TruckMapLoaded(
-          markers: markers,
-          userLocation: LatLng(
-            userLocation.latitude!,
-            userLocation.longitude!,
-          ),
-        ),
-      );
     } catch (e) {
-      dispose();
       emit(
         TruckMapFailed(
           errorMsg: e.toString(),
         ),
       );
     }
-  }
-
-  dispose() {
-    _userSocket.dispose();
   }
 }

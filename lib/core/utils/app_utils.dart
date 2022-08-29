@@ -39,19 +39,16 @@ GarbageRequest nearestRequest(
   if (requests.length == 1) {
     return requests[0];
   }
-  double min = 0;
+  double min =
+      calculateDistance(lat, long, requests[0].latitude, requests[0].longitude);
   GarbageRequest nearestReq = requests[0];
   for (var request in requests) {
-    if (min == 0) {
-      min = calculateDistance(lat, long, request.latitude, request.longitude);
+    double distance =
+        calculateDistance(lat, long, request.latitude, request.longitude);
+
+    if (distance < min) {
+      min = distance;
       nearestReq = request;
-    } else {
-      double distance =
-          calculateDistance(lat, long, request.latitude, request.longitude);
-      if (distance < min) {
-        min = distance;
-        nearestReq = request;
-      }
     }
   }
   return nearestReq;

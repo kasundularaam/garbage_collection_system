@@ -1,4 +1,5 @@
-const String server = "http://192.168.8.101";
+const String server =
+    "http://ec2-3-110-159-30.ap-south-1.compute.amazonaws.com";
 
 const String httpPort = "8000";
 

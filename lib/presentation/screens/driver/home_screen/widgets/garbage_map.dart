@@ -5,7 +5,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../../../../../../core/components/components.dart';
 import '../../../../../logic/cubit/garbage_map_cubit/garbage_map_cubit.dart';
 
-class GarbageMap extends StatelessWidget {
+class GarbageMap extends StatefulWidget {
   final Map<PolylineId, Polyline> polylines;
   const GarbageMap({
     Key? key,
@@ -16,6 +16,14 @@ class GarbageMap extends StatelessWidget {
     target: LatLng(6.9271, 79.8612),
     zoom: 15,
   );
+
+  @override
+  State<GarbageMap> createState() => _GarbageMapState();
+}
+
+class _GarbageMapState extends State<GarbageMap> {
+  GoogleMapController? _controller;
+  Map<PolylineId, Polyline> get polylines => widget.polylines;
 
   Future<void> _truckLocation(
       {required LatLng latLng, required GoogleMapController controller}) async {
@@ -34,6 +42,12 @@ class GarbageMap extends StatelessWidget {
         if (state is GarbageMapFailed) {
           showSnackBar(context, state.errorMsg);
         }
+        if (state is GarbageMapLoaded) {
+          if (_controller != null) {
+            _truckLocation(
+                latLng: state.trackLocation, controller: _controller!);
+          }
+        }
       },
       builder: (context, state) {
         if (state is GarbageMapLoading) {
@@ -42,18 +56,19 @@ class GarbageMap extends StatelessWidget {
         if (state is GarbageMapLoaded) {
           return GoogleMap(
             mapType: MapType.normal,
-            initialCameraPosition: colombo,
+            initialCameraPosition: GarbageMap.colombo,
             onMapCreated: (GoogleMapController controller) {
+              _controller = controller;
               _truckLocation(
-                  latLng: state.trackLocation, controller: controller);
+                  latLng: state.trackLocation, controller: _controller!);
             },
             markers: state.markers,
-            polylines: Set<Polyline>.of(polylines.values),
+            polylines: Set<Polyline>.of(widget.polylines.values),
           );
         }
         return const GoogleMap(
           mapType: MapType.normal,
-          initialCameraPosition: colombo,
+          initialCameraPosition: GarbageMap.colombo,
         );
       },
     );
