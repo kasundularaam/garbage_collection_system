@@ -1,6 +1,5 @@
 import 'dart:math';
 import 'dart:ui' as ui;
-import 'dart:typed_data';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/services.dart';
