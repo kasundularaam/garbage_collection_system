@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:garbage_collection_system/data/firebase/auth.dart';
 
 import '../../../data/http/http_services.dart';
 import '../../../data/models/app_user.dart';
@@ -20,6 +21,7 @@ class LandingCubit extends Cubit<LandingState> {
         final bool isDriver = await SharedAuth.isDriver();
         HttpServices httpServices = HttpServices();
         AppUser appUser = await httpServices.getUser(id: uid);
+        await FireAuth.signInAnonymously();
         if (isDriver) {
           emit(LandingToDriver(appUser: appUser));
         } else {

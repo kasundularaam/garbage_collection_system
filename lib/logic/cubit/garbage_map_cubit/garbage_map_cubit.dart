@@ -2,12 +2,14 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:garbage_collection_system/data/firebase/store.dart';
+import 'package:garbage_collection_system/data/location/location_services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../core/constants/strings.dart';
 import '../../../core/utils/app_utils.dart';
 import '../../../data/models/app_user.dart';
-import '../../../data/socket_io/driver.dart';
+import '../../../data/models/truck_location.dart';
 
 part 'garbage_map_state.dart';
 
@@ -20,8 +22,6 @@ class GarbageMapCubit extends Cubit<GarbageMapState> {
     required this.target,
     required this.start,
   }) : super(GarbageMapInitial());
-
-  final DriverSocket _driverSocket = DriverSocket();
 
   Future loadMap() async {
     try {
@@ -44,11 +44,20 @@ class GarbageMapCubit extends Cubit<GarbageMapState> {
       markers.add(targetMarker);
       markers.add(truckInitMarker);
 
-      _driverSocket.sendData(appUser: appUser).listen((location) async {
+      LocationServices.locationStream.listen((location) async {
+        await MyFireStore.updateTruck(
+            truckLocation: TruckLocation(
+          id: appUser.id,
+          name: appUser.username,
+          lat: location.latitude!,
+          lng: location.longitude!,
+          mobileNum: appUser.mobileNo,
+        ));
+
         Marker truckTrackMarker = await getMarker(
             markerId: "truck",
             icon: Strings.truck,
-            latLng: LatLng(location.lat, location.lng),
+            latLng: LatLng(location.latitude!, location.longitude!),
             info: "");
         markers = markers
             .map((item) =>
@@ -58,7 +67,7 @@ class GarbageMapCubit extends Cubit<GarbageMapState> {
         emit(
           GarbageMapLoaded(
               markers: markers,
-              trackLocation: LatLng(location.lat, location.lng)),
+              trackLocation: LatLng(location.latitude!, location.longitude!)),
         );
       });
     } catch (e) {

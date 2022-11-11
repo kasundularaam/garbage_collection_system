@@ -35,7 +35,7 @@ class DriverSocket {
         truckLocation: truckLocation,
       );
       socket.emit(
-        "driver",
+        "truck",
         truckLocation.toMap(),
       );
     });

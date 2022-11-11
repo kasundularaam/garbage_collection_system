@@ -5,20 +5,19 @@ import 'package:location/location.dart';
 
 import '../../../core/constants/strings.dart';
 import '../../../core/utils/app_utils.dart';
+import '../../../data/firebase/store.dart';
 import '../../../data/location/location_services.dart';
-import '../../../data/socket_io/user.dart';
 
 part 'truck_map_state.dart';
 
 class TruckMapCubit extends Cubit<TruckMapState> {
   TruckMapCubit() : super(TruckMapInitial());
 
-  final UserSocket _userSocket = UserSocket();
-
   Future loadMap() async {
     try {
       emit(TruckMapLoading());
-      Set<Marker> markers = {};
+      List<int> ids = [];
+      List<Marker> markers = [];
       LocationData userLocation = await LocationServices.locationData();
       Marker user = await getMarker(
           markerId: "user",
@@ -29,7 +28,7 @@ class TruckMapCubit extends Cubit<TruckMapState> {
 
       emit(
         TruckMapLoaded(
-          markers: markers,
+          markers: {...markers},
           userLocation: LatLng(
             userLocation.latitude!,
             userLocation.longitude!,
@@ -37,18 +36,22 @@ class TruckMapCubit extends Cubit<TruckMapState> {
         ),
       );
 
-      _userSocket.getTruckLocations().listen((truckLocation) async {
+      MyFireStore.getLocations().listen((truckLocation) async {
         Marker truck = await getMarker(
             markerId: "truck_${truckLocation.id}",
             icon: Strings.truck,
             latLng: LatLng(truckLocation.lat, truckLocation.lng),
             info: "");
-        markers.add(truck);
-
+        if (ids.contains(truckLocation.id)) {
+          markers[ids.indexOf(truckLocation.id) + 1] = truck;
+        } else {
+          ids.add(truckLocation.id);
+          markers.add(truck);
+        }
         if (isClosed) return;
         emit(
           TruckMapLoaded(
-            markers: markers,
+            markers: {...markers},
             userLocation: LatLng(
               userLocation.latitude!,
               userLocation.longitude!,

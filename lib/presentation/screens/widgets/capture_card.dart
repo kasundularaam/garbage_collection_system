@@ -75,8 +75,10 @@ class _CaptureCardState extends State<CaptureCard> {
                   child: text("capture_garbage".tr(), 12, AppColors.dark3),
                 ),
                 hSpacer(5),
-                buttonFilledP("capture".tr(),
-                    () => BlocProvider.of<GetImageCubit>(context).getImage())
+                buttonFilledP(
+                  "capture".tr(),
+                  () => BlocProvider.of<GetImageCubit>(context).getImage(),
+                )
               ],
             ),
           ],
