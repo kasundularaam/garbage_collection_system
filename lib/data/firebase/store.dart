@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:garbage_collection_system/data/models/truck_location.dart';
+
+import '../models/truck_location.dart';
 
 class MyFireStore {
   static CollectionReference trucks =

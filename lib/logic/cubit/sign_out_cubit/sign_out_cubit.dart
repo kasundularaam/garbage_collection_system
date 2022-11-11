@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:garbage_collection_system/data/firebase/auth.dart';
 
+import '../../../data/firebase/auth.dart';
 import '../../../data/shared/shared_auth.dart';
 
 part 'sign_out_state.dart';

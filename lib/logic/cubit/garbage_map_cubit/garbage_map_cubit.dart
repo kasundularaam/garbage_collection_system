@@ -2,12 +2,12 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:garbage_collection_system/data/firebase/store.dart';
-import 'package:garbage_collection_system/data/location/location_services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../core/constants/strings.dart';
 import '../../../core/utils/app_utils.dart';
+import '../../../data/firebase/store.dart';
+import '../../../data/location/location_services.dart';
 import '../../../data/models/app_user.dart';
 import '../../../data/models/truck_location.dart';
 
