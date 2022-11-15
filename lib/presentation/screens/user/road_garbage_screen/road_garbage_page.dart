@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../core/components/components.dart';
+import '../../../../core/constants/strings.dart';
 import '../../../../data/models/app_user.dart';
 import '../../../../data/models/garbage_request_req.dart';
 import '../../../../logic/cubit/get_image_cubit/get_image_cubit.dart';
@@ -74,6 +75,36 @@ class _RoadGarbagePageState extends State<RoadGarbagePage> {
                       ),
                     ),
                     vSpacer(3),
+                  ],
+                ),
+              );
+            }
+            if (state is RoadGarbageNotDetected) {
+              return Expanded(
+                child: Padding(
+                  padding: EdgeInsets.all(10.w),
+                  child: Image.asset(
+                    Strings.noGarbage,
+                    fit: BoxFit.fitHeight,
+                  ),
+                ),
+              );
+            }
+            if (state is RoadGarbageFailed) {
+              return Expanded(
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.all(10.w),
+                        child: Image.asset(
+                          Strings.error,
+                          fit: BoxFit.fitHeight,
+                        ),
+                      ),
+                    ),
+                    textD("error".tr(), 12),
+                    vSpacer(3)
                   ],
                 ),
               );

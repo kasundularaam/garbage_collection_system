@@ -15,7 +15,7 @@ class TargetsCubit extends Cubit<TargetsState> {
   Future loadTargets() async {
     try {
       emit(TargetsLoading());
-      final HttpServices services = HttpServices();
+      final HttpServices services = await HttpServices.initialize();
       final List<GarbageRequest> targets =
           await services.getNewGarbageRequests();
       if (targets.isNotEmpty) {

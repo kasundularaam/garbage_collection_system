@@ -11,7 +11,7 @@ class GarbageCollectedCubit extends Cubit<GarbageCollectedState> {
   Future updateRequest({required GarbageRequest request}) async {
     try {
       emit(GarbageCollectedUpdating());
-      HttpServices services = HttpServices();
+      final HttpServices services = await HttpServices.initialize();
       final GarbageRequest updated =
           await services.updateGarbageRequest(request: request);
       emit(GarbageCollectedUpdated(garbageRequest: updated));

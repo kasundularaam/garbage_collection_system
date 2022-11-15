@@ -9,11 +9,16 @@ part 'get_image_state.dart';
 class GetImageCubit extends Cubit<GetImageState> {
   GetImageCubit() : super(GetImageInitial());
 
-  Future getImage() async {
+  Future getImage({required bool isCamera}) async {
     try {
       emit(GetImageLoading());
-      final File image = await ImageServices.camImage();
-      emit(GetImageLoaded(image: image));
+      if (isCamera) {
+        File image = await ImageServices.camImage();
+        emit(GetImageLoaded(image: image));
+      } else {
+        File image = await ImageServices.galleryImage();
+        emit(GetImageLoaded(image: image));
+      }
     } catch (e) {
       emit(GetImageFailed(errorMsg: e.toString()));
     }

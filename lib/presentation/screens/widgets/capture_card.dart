@@ -3,11 +3,11 @@ import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:garbage_collection_system/core/themes/app_colors.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/components/components.dart';
 import '../../../core/constants/strings.dart';
-import '../../../core/themes/app_colors.dart';
 import '../../../logic/cubit/get_image_cubit/get_image_cubit.dart';
 
 class CaptureCard extends StatefulWidget {
@@ -68,17 +68,40 @@ class _CaptureCardState extends State<CaptureCard> {
                 },
               ),
             ),
-            vSpacer(2),
+            vSpacer(1),
+            textD("pick_image_from".tr(), 14, bold: true),
+            vSpacer(1),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Expanded(
-                  child: text("capture_garbage".tr(), 12, AppColors.dark3),
+                Column(
+                  children: [
+                    IconButton(
+                      iconSize: 40,
+                      onPressed: () => BlocProvider.of<GetImageCubit>(context)
+                          .getImage(isCamera: false),
+                      icon: const Icon(
+                        Icons.image_rounded,
+                        color: AppColors.primaryColor,
+                      ),
+                    ),
+                    textD("gallery".tr(), 12),
+                  ],
                 ),
-                hSpacer(5),
-                buttonFilledP(
-                  "capture".tr(),
-                  () => BlocProvider.of<GetImageCubit>(context).getImage(),
-                )
+                Column(
+                  children: [
+                    IconButton(
+                      iconSize: 40,
+                      onPressed: () => BlocProvider.of<GetImageCubit>(context)
+                          .getImage(isCamera: true),
+                      icon: const Icon(
+                        Icons.camera_rounded,
+                        color: AppColors.primaryColor,
+                      ),
+                    ),
+                    textD("camera".tr(), 12),
+                  ],
+                ),
               ],
             ),
           ],

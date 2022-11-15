@@ -15,7 +15,7 @@ class ComplainCubit extends Cubit<ComplainState> {
     try {
       emit(ComplainSending());
       complainValid(complainReq.detail);
-      final HttpServices services = HttpServices();
+      final HttpServices services = await HttpServices.initialize();
       final Complain complain =
           await services.createComplain(complainReq: complainReq);
       emit(ComplainSent(complain: complain));

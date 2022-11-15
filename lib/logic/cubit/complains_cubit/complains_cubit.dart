@@ -12,7 +12,7 @@ class ComplainsCubit extends Cubit<ComplainsState> {
   Future loadComplains({required String reqId}) async {
     try {
       emit(ComplainsLoading());
-      final HttpServices services = HttpServices();
+      final HttpServices services = await HttpServices.initialize();
       final List<Complain> complains =
           await services.getComplains(reqId: reqId);
       emit(ComplainsLoaded(complains: complains));

@@ -19,8 +19,8 @@ class LandingCubit extends Cubit<LandingState> {
       if (isUserIn) {
         final int uid = await SharedAuth.getUid();
         final bool isDriver = await SharedAuth.isDriver();
-        HttpServices httpServices = HttpServices();
-        AppUser appUser = await httpServices.getUser(id: uid);
+        final HttpServices services = await HttpServices.initialize();
+        AppUser appUser = await services.getUser(id: uid);
         await FireAuth.signInAnonymously();
         if (isDriver) {
           emit(LandingToDriver(appUser: appUser));

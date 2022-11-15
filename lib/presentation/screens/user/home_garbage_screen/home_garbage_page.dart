@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../core/components/components.dart';
+import '../../../../core/constants/strings.dart';
 import '../../../../core/themes/app_colors.dart';
 import '../../../../data/models/app_user.dart';
 import '../../../../data/models/garbage_request_req.dart';
@@ -44,7 +45,7 @@ class _HomeGarbagePageState extends State<HomeGarbagePage> {
                 requestReq = GarbageRequestReq(
                     user: "${user.id}",
                     mobileNo: user.mobileNo,
-                    garbageType: state.contents.toString(),
+                    garbageType: state.content,
                     location: "Home",
                     longitude: state.longitude,
                     latitude: state.latitude,
@@ -60,6 +61,7 @@ class _HomeGarbagePageState extends State<HomeGarbagePage> {
                 );
               }
               if (state is HomeGarbageLoaded) {
+                final List<String> contents = [state.content];
                 return Expanded(
                   child: ListView(
                     physics: const BouncingScrollPhysics(),
@@ -75,7 +77,7 @@ class _HomeGarbagePageState extends State<HomeGarbagePage> {
                               vSpacer(1),
                               Wrap(
                                 spacing: 2.w,
-                                children: state.contents
+                                children: contents
                                     .map((e) => Chip(
                                           label: textL(e, 12),
                                           backgroundColor:
@@ -100,6 +102,36 @@ class _HomeGarbagePageState extends State<HomeGarbagePage> {
                         ),
                       ),
                       vSpacer(3),
+                    ],
+                  ),
+                );
+              }
+              if (state is HomeGarbageNotDetected) {
+                return Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.all(10.w),
+                    child: Image.asset(
+                      Strings.noGarbage,
+                      fit: BoxFit.fitHeight,
+                    ),
+                  ),
+                );
+              }
+              if (state is HomeGarbageFailed) {
+                return Expanded(
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.all(10.w),
+                          child: Image.asset(
+                            Strings.error,
+                            fit: BoxFit.fitHeight,
+                          ),
+                        ),
+                      ),
+                      textD("error".tr(), 12),
+                      vSpacer(3)
                     ],
                   ),
                 );

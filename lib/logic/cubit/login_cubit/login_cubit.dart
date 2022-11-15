@@ -17,7 +17,7 @@ class LoginCubit extends Cubit<LoginState> {
       emit(LoginLoading());
       emailValid(email);
       passwordValid(password);
-      HttpServices httpServices = HttpServices();
+      HttpServices httpServices = await HttpServices.initialize();
       LoginRes loginRes =
           await httpServices.login(email: email, password: password);
       AppUser appUser = await httpServices.getUser(id: loginRes.id);

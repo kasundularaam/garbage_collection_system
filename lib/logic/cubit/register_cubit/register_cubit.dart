@@ -23,7 +23,7 @@ class RegisterCubit extends Cubit<RegisterState> {
       passwordValid(registerReq.password);
       passwordsValid(registerReq.password, confirm);
 
-      HttpServices httpServices = HttpServices();
+      HttpServices httpServices = await HttpServices.initialize();
       AppUser user = await httpServices.register(registerReq: registerReq);
       SharedAuth.addUser(uid: user.id, type: user.type);
       emit(RegisterSucceed(appUser: user));

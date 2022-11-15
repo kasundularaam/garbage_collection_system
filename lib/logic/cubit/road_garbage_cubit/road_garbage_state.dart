@@ -17,6 +17,8 @@ class RoadGarbageLoaded extends RoadGarbageState {
   });
 }
 
+class RoadGarbageNotDetected extends RoadGarbageState {}
+
 class RoadGarbageFailed extends RoadGarbageState {
   final String errorMsg;
   RoadGarbageFailed({

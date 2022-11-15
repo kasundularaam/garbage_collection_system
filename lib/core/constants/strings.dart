@@ -13,4 +13,6 @@ class Strings {
   static const road = '$images/road.png';
   static const done = '$images/done.png';
   static const capture = '$images/capture.png';
+  static const noGarbage = '$images/no_garbage.png';
+  static const error = '$images/error.png';
 }
