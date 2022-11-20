@@ -46,7 +46,7 @@ class _HomeGarbagePageState extends State<HomeGarbagePage> {
                     user: "${user.id}",
                     mobileNo: user.mobileNo,
                     garbageType: state.content,
-                    location: "Home",
+                    location: "${user.username},${user.address}",
                     longitude: state.longitude,
                     latitude: state.latitude,
                     status: "PENDING");

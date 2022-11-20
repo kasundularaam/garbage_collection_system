@@ -44,7 +44,7 @@ class _RoadGarbagePageState extends State<RoadGarbagePage> {
                   user: "${user.id}",
                   mobileNo: user.mobileNo,
                   garbageType: "ALL",
-                  location: "Road",
+                  location: "${user.username},${user.address}",
                   longitude: state.longitude,
                   latitude: state.latitude,
                   status: "PENDING");
