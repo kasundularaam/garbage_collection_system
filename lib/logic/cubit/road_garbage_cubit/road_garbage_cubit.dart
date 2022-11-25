@@ -21,7 +21,7 @@ class RoadGarbageCubit extends Cubit<RoadGarbageState> {
           await HttpServices.initialize(isImageServer: true);
       final ImageRes imageRes =
           await httpImageServices.analyzeImage(image: image);
-      if (imageRes.status == "SUCCESS") {
+      if (imageRes.status == "SUCCESS" && imageRes.result != "other") {
         final int id = await SharedAuth.getUid();
         final HttpServices httpServices = await HttpServices.initialize();
         final AppUser appUser = await httpServices.getUser(id: id);
