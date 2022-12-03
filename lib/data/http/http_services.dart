@@ -31,7 +31,7 @@ class HttpServices {
     final BaseOptions options = BaseOptions(
       baseUrl: baseUrl,
       connectTimeout: 5000,
-      receiveTimeout: 8000,
+      receiveTimeout: 12000,
     );
     final Dio dio = Dio(options);
     HttpServices httpServices = HttpServices._initialize(dio: dio);
