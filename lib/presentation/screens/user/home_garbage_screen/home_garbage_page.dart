@@ -108,12 +108,20 @@ class _HomeGarbagePageState extends State<HomeGarbagePage> {
               }
               if (state is HomeGarbageNotDetected) {
                 return Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.all(10.w),
-                    child: Image.asset(
-                      Strings.noGarbage,
-                      fit: BoxFit.fitHeight,
-                    ),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.all(10.w),
+                          child: Image.asset(
+                            Strings.noGarbage,
+                            fit: BoxFit.fitHeight,
+                          ),
+                        ),
+                      ),
+                      textD("garbage_not_detected".tr(), 12),
+                      vSpacer(3)
+                    ],
                   ),
                 );
               }

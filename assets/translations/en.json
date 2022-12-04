@@ -39,6 +39,7 @@
     "remove_account":"remove account from this device: ",
     "garbage_location": "Garbage on {location}",
     "garbage_type": "Garbage type: {type}",
+    "garbage_not_detected": "Garbage not detected",
     "Home":"Home",
     "Road":"Road",
     "home": "Home",

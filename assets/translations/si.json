@@ -39,6 +39,7 @@
     "remove_account": "මෙම උපාංගයෙන් ගිණුම ඉවත් කරන්න: ",
     "garbage_location": "කසල ඇති ස්තානය: {location}",
     "garbage_type": "කසල ස්ව්භාවය: {type}",
+    "garbage_not_detected": "කසළ හඳුනාගෙන නොමැත",
     "Home": "නිවස",
     "Road": "මාර්ගය",
     "home": "මුල් පිටුව",

@@ -81,12 +81,20 @@ class _RoadGarbagePageState extends State<RoadGarbagePage> {
             }
             if (state is RoadGarbageNotDetected) {
               return Expanded(
-                child: Padding(
-                  padding: EdgeInsets.all(10.w),
-                  child: Image.asset(
-                    Strings.noGarbage,
-                    fit: BoxFit.fitHeight,
-                  ),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.all(10.w),
+                        child: Image.asset(
+                          Strings.noGarbage,
+                          fit: BoxFit.fitHeight,
+                        ),
+                      ),
+                    ),
+                    textD("garbage_not_detected".tr(), 12),
+                    vSpacer(3)
+                  ],
                 ),
               );
             }
