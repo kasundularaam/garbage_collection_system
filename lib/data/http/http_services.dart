@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -124,10 +125,15 @@ class HttpServices {
   }
 
   Future<GarbageRequest> updateGarbageRequest(
-      {required GarbageRequest request}) async {
+      {required GarbageRequest request, required int uid}) async {
     try {
+      final Map<String, dynamic> modifiedMap = {
+        ...request.toMap(),
+        "driverId": uid
+      };
+      log(modifiedMap.toString());
       Response response =
-          await dio.put("/request/${request.id}", data: request.toMap());
+          await dio.put("/request/${request.id}", data: modifiedMap);
       return GarbageRequest.fromMap(response.data);
     } on SocketException {
       throw "network_error".tr();
