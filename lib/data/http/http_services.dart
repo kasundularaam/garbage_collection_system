@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -32,7 +31,7 @@ class HttpServices {
     final BaseOptions options = BaseOptions(
       baseUrl: baseUrl,
       connectTimeout: 5000,
-      receiveTimeout: 12000,
+      receiveTimeout: 30000,
     );
     final Dio dio = Dio(options);
     HttpServices httpServices = HttpServices._initialize(dio: dio);
@@ -131,7 +130,6 @@ class HttpServices {
         ...request.toMap(),
         "driverId": uid
       };
-      log(modifiedMap.toString());
       Response response =
           await dio.put("/request/${request.id}", data: modifiedMap);
       return GarbageRequest.fromMap(response.data);

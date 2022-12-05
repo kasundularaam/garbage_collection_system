@@ -9,7 +9,7 @@ class MyFireStore {
   static Future<void> updateTruck(
       {required TruckLocation truckLocation}) async {
     try {
-      await trucks.doc("vZwV3wpe3h9UixEqbM0j").update(truckLocation.toMap());
+      await trucks.doc("anc2kndgN5zmX0U5guN4").update(truckLocation.toMap());
     } catch (e) {
       throw e.toString();
     }

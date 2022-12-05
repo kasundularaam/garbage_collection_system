@@ -1,33 +1,41 @@
 {
   "project_info": {
-    "project_number": "207451388787",
-    "project_id": "bin-eazy",
-    "storage_bucket": "bin-eazy.appspot.com"
+    "project_number": "84335265376",
+    "project_id": "bin-eazy-fcd45",
+    "storage_bucket": "bin-eazy-fcd45.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:207451388787:android:dd55b4aa55924a7bc9e306",
+        "mobilesdk_app_id": "1:84335265376:android:6ccfcf06ddd1815aaea505",
         "android_client_info": {
           "package_name": "com.gcs.garbage_collection_system"
         }
       },
       "oauth_client": [
         {
-          "client_id": "207451388787-dlsd2h65fhsak296q8u6156csggk853r.apps.googleusercontent.com",
+          "client_id": "84335265376-rgju5uq4kgruolabl6agbp3c4uc184ma.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gcs.garbage_collection_system",
+            "certificate_hash": "dd66b01ccc982cb7fc7c81512ec02a8e70c6dcf9"
+          }
+        },
+        {
+          "client_id": "84335265376-6ta2go1bqtrfs4h11gv1ged5slmpd7n1.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD4nQ7LxCfK8MH-N2nFycj9tFWt2SEs5-Y"
+          "current_key": "AIzaSyA6HvQVC4AjNFzlWM-6iGm9u7AUITTCv6Y"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "207451388787-dlsd2h65fhsak296q8u6156csggk853r.apps.googleusercontent.com",
+              "client_id": "84335265376-6ta2go1bqtrfs4h11gv1ged5slmpd7n1.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
